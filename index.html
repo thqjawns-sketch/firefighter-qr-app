@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1.0">
+
+  <title>소방대원 QR 스캔</title>
+
+  <script src="https://unpkg.com/html5-qrcode"
+          type="text/javascript">
+  </script>
+
+  <style>
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background: #f4f6f8;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: auto;
+    }
+
+    .title {
+      background: #17365d;
+      color: white;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px
+                  rgba(0,0,0,0.08);
+    }
+
+    .scanButton {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 17px;
+      font-size: 19px;
+      font-weight: bold;
+      background: #17365d;
+      color: white;
+      cursor: pointer;
+    }
+
+    #reader {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #eeeeee;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .success {
+      background: #e6f4ea;
+      color: #137333;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <div class="title">
+    🚒 소방대원 현장안전관리
+  </div>
+
+
+  <div class="card">
+
+    <h2>대원 QR 확인</h2>
+
+    <p>
+      아래 버튼을 누른 후
+      대원의 QR코드를 카메라에 비추세요.
+    </p>
+
+    <button
+      class="scanButton"
+      onclick="startScanner()">
+
+      📷 대원 QR 스캔 시작
+
+    </button>
+
+
+    <div id="reader"></div>
+
+
+    <div
+      id="result"
+      class="result">
+
+      QR 스캔 대기
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  let scanner = null;
+  let scanning = false;
+
+
+  function startScanner() {
+
+    if (scanning) {
+      return;
+    }
+
+    const result =
+      document.getElementById("result");
+
+    result.className = "result";
+    result.innerText =
+      "📷 카메라를 준비하고 있습니다...";
+
+
+    scanner =
+      new Html5Qrcode("reader");
+
+
+    Html5Qrcode
+      .getCameras()
+
+      .then(function(cameras) {
+
+        if (!cameras || cameras.length === 0) {
+
+          result.innerText =
+            "카메라를 찾을 수 없습니다.";
+
+          return;
+        }
+
+
+        // 보통 휴대폰의 후면 카메라 사용
+        let cameraId =
+          cameras[cameras.length - 1].id;
+
+
+        scanning = true;
+
+
+        scanner.start(
+
+          cameraId,
+
+          {
+            fps: 10,
+
+            qrbox: {
+              width: 250,
+              height: 250
+            }
+          },
+
+
+          function(decodedText) {
+
+            result.className =
+              "result success";
+
+            result.innerHTML =
+              "✅ 대원 QR 인식 완료<br><br>" +
+              decodedText;
+
+
+            scanner.stop()
+              .then(function() {
+
+                scanning = false;
+
+              });
+
+          },
+
+
+          function(errorMessage) {
+
+            // QR을 찾는 중 발생하는
+            // 일반적인 인식 실패는 표시하지 않음
+
+          }
+
+        );
+
+      })
+
+      .catch(function(error) {
+
+        result.innerText =
+          "카메라 실행 실패 : " +
+          error;
+
+        scanning = false;
+
+      });
+
+  }
+
+</script>
+
+</body>
+</html>
