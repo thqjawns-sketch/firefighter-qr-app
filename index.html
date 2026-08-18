@@ -93,6 +93,16 @@ button {
   color: white;
 }
 
+.selectAll {
+  background: #e8f0fe;
+  color: #17365d;
+}
+
+.batchExit {
+  background: #188038;
+  color: white;
+}
+
 #reader {
   width: 100%;
   margin-top: 12px;
@@ -151,8 +161,20 @@ button {
 }
 
 .memberRow {
-  padding: 12px 4px;
+  padding: 13px 4px;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.memberRow input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-top: 6px;
+}
+
+.memberDetail {
+  flex: 1;
 }
 
 .time {
@@ -170,6 +192,13 @@ button {
   margin-top: 8px;
   font-size: 13px;
   color: #666;
+}
+
+.selectedCount {
+  margin-top: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #188038;
 }
 
 </style>
@@ -344,7 +373,7 @@ onclick="entryMember()">
 <button class="exit"
 onclick="exitMember()">
 
-🟢 철수 처리
+🟢 선택 대원 단독 철수
 
 </button>
 
@@ -371,16 +400,37 @@ onclick="loadInsideMembers()">
 
 <div id="insideList"></div>
 
+
+<button class="selectAll"
+onclick="toggleSelectAll()">
+
+☑ 전체 선택 / 해제
+
+</button>
+
+
+<div
+id="selectedCount"
+class="selectedCount">
+
+선택 대원 0명
+
+</div>
+
+
+<button class="batchExit"
+onclick="batchExitMembers()">
+
+🟢 선택 대원 일괄 철수처리
+
+</button>
+
 </div>
 
 </div>
 
 
 <script>
-
-// =============================================
-// Apps Script API 주소
-// =============================================
 
 const API =
 "https://script.google.com/macros/s/AKfycbxTKCw24jpy-A2Z262fE005EXYBPohAWpjaw9NDcGE2RJhO6UGNs-LZrMzZTAVnE8zu/exec";
@@ -390,11 +440,8 @@ let members = [];
 let currentMember = null;
 let scanner = null;
 let scanning = false;
+let selectAllState = false;
 
-
-// =============================================
-// 한글 초성
-// =============================================
 
 const CHOSUNG = [
   "ㄱ","ㄲ","ㄴ","ㄷ","ㄸ",
@@ -404,10 +451,6 @@ const CHOSUNG = [
 ];
 
 
-// =============================================
-// 시작
-// =============================================
-
 window.onload = function() {
 
   loadSites();
@@ -415,10 +458,6 @@ window.onload = function() {
 
 };
 
-
-// =============================================
-// 현장목록
-// =============================================
 
 async function loadSites() {
 
@@ -463,10 +502,6 @@ async function loadSites() {
 }
 
 
-// =============================================
-// 대원명단 불러오기
-// =============================================
-
 async function loadMembers() {
 
   try {
@@ -494,10 +529,6 @@ async function loadMembers() {
 
 }
 
-
-// =============================================
-// 초성 추출
-// =============================================
 
 function getChosung(text) {
 
@@ -539,10 +570,6 @@ function getChosung(text) {
 }
 
 
-// =============================================
-// 대원 검색
-// =============================================
-
 function filterMembers() {
 
   const input =
@@ -567,7 +594,6 @@ function filterMembers() {
   if (input === "") {
 
     currentMember = null;
-
     return;
 
   }
@@ -601,13 +627,9 @@ function filterMembers() {
       return (
 
         name.includes(input) ||
-
         chosung.includes(input) ||
-
         id.includes(input) ||
-
         dept.includes(input) ||
-
         rank.includes(input)
 
       );
@@ -660,10 +682,6 @@ function filterMembers() {
 }
 
 
-// =============================================
-// QR 카메라
-// =============================================
-
 async function startScanner() {
 
   if (scanning) return;
@@ -690,7 +708,6 @@ async function startScanner() {
     if (!cameras.length) {
 
       alert("카메라를 찾을 수 없습니다.");
-
       return;
 
     }
@@ -738,9 +755,7 @@ async function startScanner() {
       },
 
 
-      function() {
-
-      }
+      function() {}
 
     );
 
@@ -759,10 +774,6 @@ async function startScanner() {
 
 }
 
-
-// =============================================
-// QR 대원 찾기
-// =============================================
 
 function findMemberByQR(id) {
 
@@ -820,10 +831,6 @@ function findMemberByQR(id) {
 }
 
 
-// =============================================
-// 직접 대원 선택
-// =============================================
-
 function manualMemberSelect() {
 
   const id =
@@ -835,7 +842,6 @@ function manualMemberSelect() {
   if (!id) {
 
     currentMember = null;
-
     return;
 
   }
@@ -857,10 +863,6 @@ function manualMemberSelect() {
 
 }
 
-
-// =============================================
-// 대원 표시
-// =============================================
 
 function showMember(member) {
 
@@ -884,18 +886,12 @@ function showMember(member) {
 }
 
 
-// =============================================
-// PPE
-// =============================================
-
 function checkPPE() {
 
   const complete =
 
     document.getElementById("ppe1").checked &&
-
     document.getElementById("ppe2").checked &&
-
     document.getElementById("ppe3").checked;
 
 
@@ -932,10 +928,6 @@ function checkPPE() {
 }
 
 
-// =============================================
-// 진입
-// =============================================
-
 async function entryMember() {
 
   const site =
@@ -952,7 +944,6 @@ async function entryMember() {
   if (!site) {
 
     alert("화재현장을 선택하세요.");
-
     return;
 
   }
@@ -961,7 +952,6 @@ async function entryMember() {
   if (!officer) {
 
     alert("안전점검관 성명을 입력하세요.");
-
     return;
 
   }
@@ -981,9 +971,7 @@ async function entryMember() {
   const ppeOK =
 
     document.getElementById("ppe1").checked &&
-
     document.getElementById("ppe2").checked &&
-
     document.getElementById("ppe3").checked;
 
 
@@ -1002,34 +990,11 @@ async function entryMember() {
     new URLSearchParams();
 
 
-  form.append(
-    "action",
-    "entry"
-  );
-
-
-  form.append(
-    "site",
-    site
-  );
-
-
-  form.append(
-    "memberId",
-    currentMember.id
-  );
-
-
-  form.append(
-    "memberName",
-    currentMember.name
-  );
-
-
-  form.append(
-    "officer",
-    officer
-  );
+  form.append("action","entry");
+  form.append("site",site);
+  form.append("memberId",currentMember.id);
+  form.append("memberName",currentMember.name);
+  form.append("officer",officer);
 
 
   try {
@@ -1067,16 +1032,10 @@ async function entryMember() {
       "진입 기록 중 오류가 발생했습니다."
     );
 
-    console.error(error);
-
   }
 
 }
 
-
-// =============================================
-// 철수
-// =============================================
 
 async function exitMember() {
 
@@ -1087,7 +1046,6 @@ async function exitMember() {
   if (!site) {
 
     alert("화재현장을 선택하세요.");
-
     return;
 
   }
@@ -1104,33 +1062,46 @@ async function exitMember() {
   }
 
 
+  const result =
+    await exitOneMember(
+      site,
+      currentMember.id,
+      currentMember.name
+    );
+
+
+  alert(result.message);
+
+
+  if (result.success) {
+
+    resetNextMember();
+
+    await loadInsideMembers();
+
+  }
+
+}
+
+
+// ==========================================
+// 대원 1명 철수 처리 공통 함수
+// ==========================================
+
+async function exitOneMember(
+  site,
+  memberId,
+  memberName
+) {
+
   const form =
     new URLSearchParams();
 
 
-  form.append(
-    "action",
-    "exit"
-  );
-
-
-  form.append(
-    "site",
-    site
-  );
-
-
-  form.append(
-    "memberId",
-    currentMember.id
-  );
-
-
-  form.append(
-    "memberName",
-    currentMember.name
-  );
-
+  form.append("action","exit");
+  form.append("site",site);
+  form.append("memberId",memberId);
+  form.append("memberName",memberName);
 
   form.append(
     "officer",
@@ -1153,39 +1124,216 @@ async function exitMember() {
       );
 
 
-    const data =
-      await response.json();
-
-
-    alert(data.message);
-
-
-    if (data.success) {
-
-      await loadInsideMembers();
-
-      resetNextMember();
-
-    }
+    return await response.json();
 
   }
 
   catch (error) {
 
-    alert(
-      "철수 기록 중 오류가 발생했습니다."
-    );
-
-    console.error(error);
+    return {
+      success: false,
+      message:
+        memberName +
+        " 철수 처리 오류"
+    };
 
   }
 
 }
 
 
-// =============================================
-// 다음 대원 준비
-// =============================================
+// ==========================================
+// 다중 철수
+// ==========================================
+
+async function batchExitMembers() {
+
+  const site =
+    document
+      .getElementById("site")
+      .value;
+
+
+  const officer =
+    document
+      .getElementById("officer")
+      .value
+      .trim();
+
+
+  if (!site) {
+
+    alert("화재현장을 선택하세요.");
+    return;
+
+  }
+
+
+  if (!officer) {
+
+    alert("안전점검관 성명을 입력하세요.");
+    return;
+
+  }
+
+
+  const checked =
+    document.querySelectorAll(
+      ".insideCheck:checked"
+    );
+
+
+  if (checked.length === 0) {
+
+    alert(
+      "철수 처리할 대원을 선택하세요."
+    );
+
+    return;
+
+  }
+
+
+  const names =
+    Array.from(checked)
+      .map(function(box) {
+
+        return box.dataset.name;
+
+      });
+
+
+  const confirmMessage =
+
+    names.join(", ") +
+    "\n\n총 " +
+    names.length +
+    "명을 철수 처리하시겠습니까?";
+
+
+  if (!confirm(confirmMessage)) {
+
+    return;
+
+  }
+
+
+  let successCount = 0;
+  let failed = [];
+
+
+  for (const box of checked) {
+
+    const result =
+      await exitOneMember(
+
+        site,
+
+        box.dataset.id,
+
+        box.dataset.name
+
+      );
+
+
+    if (result.success) {
+
+      successCount++;
+
+    }
+
+    else {
+
+      failed.push(
+        box.dataset.name
+      );
+
+    }
+
+  }
+
+
+  let message =
+    "✅ " +
+    successCount +
+    "명 철수 처리 완료";
+
+
+  if (failed.length > 0) {
+
+    message +=
+
+      "\n\n⚠️ 처리 실패 : " +
+      failed.join(", ");
+
+  }
+
+
+  alert(message);
+
+
+  selectAllState = false;
+
+  await loadInsideMembers();
+
+}
+
+
+// ==========================================
+// 전체 선택/해제
+// ==========================================
+
+function toggleSelectAll() {
+
+  const boxes =
+    document.querySelectorAll(
+      ".insideCheck"
+    );
+
+
+  selectAllState =
+    !selectAllState;
+
+
+  boxes.forEach(
+    function(box) {
+
+      box.checked =
+        selectAllState;
+
+    }
+  );
+
+
+  updateSelectedCount();
+
+}
+
+
+// ==========================================
+// 선택 인원 표시
+// ==========================================
+
+function updateSelectedCount() {
+
+  const count =
+    document.querySelectorAll(
+      ".insideCheck:checked"
+    ).length;
+
+
+  document
+    .getElementById(
+      "selectedCount"
+    )
+    .innerHTML =
+
+    "선택 대원 " +
+    count +
+    "명";
+
+}
+
 
 function resetNextMember() {
 
@@ -1247,10 +1395,6 @@ function resetNextMember() {
 }
 
 
-// =============================================
-// 현재 내부대원
-// =============================================
-
 async function loadInsideMembers() {
 
   const site =
@@ -1269,6 +1413,9 @@ async function loadInsideMembers() {
       .getElementById("insideList")
       .innerHTML =
       "";
+
+
+    updateSelectedCount();
 
     return;
 
@@ -1313,16 +1460,15 @@ async function loadInsideMembers() {
     data.members.forEach(
       function(member) {
 
-        const div =
+        const row =
           document.createElement("div");
 
 
-        div.className =
+        row.className =
           "memberRow";
 
 
-        let warning =
-          "";
+        let warning = "";
 
 
         if (
@@ -1337,7 +1483,23 @@ async function loadInsideMembers() {
         }
 
 
-        div.innerHTML =
+        row.innerHTML =
+
+          "<input " +
+          "type='checkbox' " +
+          "class='insideCheck' " +
+
+          "data-id='" +
+          member.memberId +
+          "' " +
+
+          "data-name='" +
+          member.memberName +
+          "' " +
+
+          "onchange='updateSelectedCount()'>" +
+
+          "<div class='memberDetail'>" +
 
           "<b>" +
           member.memberName +
@@ -1358,13 +1520,20 @@ async function loadInsideMembers() {
 
           warning +
 
+          "</div>" +
+
           "</div>";
 
 
-        list.appendChild(div);
+        list.appendChild(row);
 
       }
     );
+
+
+    selectAllState = false;
+
+    updateSelectedCount();
 
   }
 
