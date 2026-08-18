@@ -97,14 +97,14 @@ button{
   color:white;
 }
 
-.batchExit{
-  background:#188038;
-  color:white;
-}
-
 .selectAll{
   background:#e8f0fe;
   color:#17365d;
+}
+
+.batchExit{
+  background:#188038;
+  color:white;
 }
 
 .back{
@@ -203,11 +203,6 @@ button{
   color:#188038;
 }
 
-
-/* ===============================
-   지휘관 현황
-================================ */
-
 #dashboardPage{
   display:none;
 }
@@ -245,21 +240,10 @@ button{
   margin-top:5px;
 }
 
-.red{
-  color:#d93025;
-}
-
-.green{
-  color:#188038;
-}
-
-.blue{
-  color:#17365d;
-}
-
-.orange{
-  color:#e37400;
-}
+.red{color:#d93025;}
+.green{color:#188038;}
+.blue{color:#17365d;}
+.orange{color:#e37400;}
 
 .sectionTitle{
   font-size:20px;
@@ -340,11 +324,6 @@ button{
 
 <div class="container">
 
-
-<!-- =================================================
-     일반 안전관리 화면
-================================================= -->
-
 <div id="mainPage">
 
 <div class="title">
@@ -390,8 +369,9 @@ onclick="openDashboard()">
 
 
 <button
+id="scanButton"
 class="scan"
-onclick="startScanner()">
+onclick="toggleScanner()">
 
 📷 대원 QR 스캔
 
@@ -580,11 +560,6 @@ onclick="batchExitMembers()">
 </div>
 
 
-
-<!-- =================================================
-     지휘관 현장 현황
-================================================= -->
-
 <div id="dashboardPage">
 
 
@@ -737,7 +712,6 @@ onclick="closeDashboard()">
 
 <script>
 
-
 const API =
 "https://script.google.com/macros/s/AKfycbxTKCw24jpy-A2Z262fE005EXYBPohAWpjaw9NDcGE2RJhO6UGNs-LZrMzZTAVnE8zu/exec";
 
@@ -757,7 +731,6 @@ const CHOSUNG = [
 ];
 
 
-
 window.onload = function(){
 
   loadSites();
@@ -765,11 +738,6 @@ window.onload = function(){
 
 };
 
-
-
-// ==========================================
-// 현장
-// ==========================================
 
 async function loadSites(){
 
@@ -814,11 +782,6 @@ async function loadSites(){
 }
 
 
-
-// ==========================================
-// 대원
-// ==========================================
-
 async function loadMembers(){
 
   try{
@@ -842,7 +805,6 @@ async function loadMembers(){
   }
 
 }
-
 
 
 function getChosung(text){
@@ -880,7 +842,6 @@ function getChosung(text){
   return result;
 
 }
-
 
 
 function filterMembers(){
@@ -991,7 +952,6 @@ function filterMembers(){
 }
 
 
-
 function manualMemberSelect(){
 
   const id =
@@ -1018,7 +978,6 @@ function manualMemberSelect(){
 }
 
 
-
 function showMember(member){
 
   document
@@ -1041,14 +1000,29 @@ function showMember(member){
 }
 
 
+// ==========================================
+// QR 카메라 켜기 / 끄기
+// ==========================================
 
-// ==========================================
-// QR
-// ==========================================
+async function toggleScanner(){
+
+  if(scanning){
+
+    await stopScanner();
+    return;
+
+  }
+
+  await startScanner();
+
+}
+
 
 async function startScanner(){
 
-  if(scanning) return;
+  const button =
+    document
+      .getElementById("scanButton");
 
 
   try{
@@ -1084,6 +1058,10 @@ async function startScanner(){
     scanning=true;
 
 
+    button.innerHTML =
+      "❌ 카메라 끄기";
+
+
     await scanner.start(
 
       cameraId,
@@ -1104,14 +1082,7 @@ async function startScanner(){
           decodedText.trim();
 
 
-        await scanner.stop();
-
-        scanning=false;
-
-
-        document
-          .getElementById("reader")
-          .innerHTML="";
+        await stopScanner();
 
 
         findMemberByQR(id);
@@ -1129,6 +1100,10 @@ async function startScanner(){
 
     scanning=false;
 
+    button.innerHTML =
+      "📷 대원 QR 스캔";
+
+
     alert(
       "카메라 실행 오류"
     );
@@ -1137,6 +1112,69 @@ async function startScanner(){
 
 }
 
+
+async function stopScanner(){
+
+  const button =
+    document
+      .getElementById("scanButton");
+
+
+  try{
+
+    if(scanner){
+
+      try{
+
+        if(scanner.isScanning){
+
+          await scanner.stop();
+
+        }
+
+      }
+
+      catch(error){
+
+        console.log(error);
+
+      }
+
+
+      try{
+
+        scanner.clear();
+
+      }
+
+      catch(error){
+
+        console.log(error);
+
+      }
+
+    }
+
+  }
+
+  finally{
+
+    scanner=null;
+
+    scanning=false;
+
+
+    document
+      .getElementById("reader")
+      .innerHTML="";
+
+
+    button.innerHTML =
+      "📷 대원 QR 스캔";
+
+  }
+
+}
 
 
 function findMemberByQR(id){
@@ -1184,11 +1222,6 @@ function findMemberByQR(id){
 
 }
 
-
-
-// ==========================================
-// PPE
-// ==========================================
 
 function checkPPE(){
 
@@ -1240,11 +1273,6 @@ function checkPPE(){
 
 }
 
-
-
-// ==========================================
-// 진입
-// ==========================================
 
 async function entryMember(){
 
@@ -1392,11 +1420,6 @@ async function entryMember(){
 }
 
 
-
-// ==========================================
-// 1명 철수
-// ==========================================
-
 async function exitOneMember(
   site,
   id,
@@ -1465,7 +1488,6 @@ async function exitOneMember(
 }
 
 
-
 async function exitMember(){
 
   const site =
@@ -1519,11 +1541,6 @@ async function exitMember(){
 
 }
 
-
-
-// ==========================================
-// 내부대원
-// ==========================================
 
 async function loadInsideMembers(){
 
@@ -1679,11 +1696,6 @@ async function loadInsideMembers(){
 }
 
 
-
-// ==========================================
-// 일괄 철수
-// ==========================================
-
 function toggleSelectAll(){
 
   const boxes =
@@ -1708,7 +1720,6 @@ function toggleSelectAll(){
 }
 
 
-
 function updateSelectedCount(){
 
   const count =
@@ -1728,7 +1739,6 @@ function updateSelectedCount(){
     "명";
 
 }
-
 
 
 async function batchExitMembers(){
@@ -1841,11 +1851,6 @@ async function batchExitMembers(){
 }
 
 
-
-// ==========================================
-// 입력 초기화
-// ==========================================
-
 function resetNextMember(){
 
   currentMember=null;
@@ -1919,11 +1924,6 @@ function resetNextMember(){
 }
 
 
-
-// ==========================================
-// 지휘관 현황 열기
-// ==========================================
-
 function openDashboard(){
 
   const site =
@@ -1966,7 +1966,6 @@ function openDashboard(){
 }
 
 
-
 function closeDashboard(){
 
   document
@@ -1993,11 +1992,6 @@ function closeDashboard(){
 
 }
 
-
-
-// ==========================================
-// 지휘관 현황 불러오기
-// ==========================================
 
 async function loadDashboard(){
 
@@ -2106,11 +2100,6 @@ async function loadDashboard(){
 
 }
 
-
-
-// ==========================================
-// 지휘관 - 현재 내부
-// ==========================================
 
 function drawDashboardInside(
   insideMembers
@@ -2242,11 +2231,6 @@ function drawDashboardInside(
 }
 
 
-
-// ==========================================
-// 지휘관 - 철수 대원
-// ==========================================
-
 function drawDashboardExited(
   exitedMembers
 ){
@@ -2353,11 +2337,6 @@ function drawDashboardExited(
 }
 
 
-
-// ==========================================
-// 활동 이력
-// ==========================================
-
 function makeHistoryHTML(
   records
 ){
@@ -2402,7 +2381,6 @@ function makeHistoryHTML(
   return html;
 
 }
-
 
 
 function toggleHistory(id){
