@@ -166,6 +166,12 @@ button {
   font-weight: bold;
 }
 
+.searchInfo {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
 </style>
 </head>
 
@@ -220,18 +226,32 @@ onclick="startScanner()">
 class="memberInfo">
 
 QR을 스캔하거나<br>
-아래 목록에서 대원을 선택하세요.
+이름·초성으로 대원을 검색하세요.
 
 </div>
 
 
-<label>직접 선택</label>
+<label>이름 / 초성 / 관리번호 검색</label>
+
+<input
+type="text"
+id="memberSearch"
+placeholder="예: 김도윤 / ㄱㄷㅇ / FW-013"
+oninput="filterMembers()">
+
+
+<div class="searchInfo">
+검색어를 입력하면 일치하는 대원만 표시됩니다.
+</div>
+
+
+<label>검색 결과</label>
 
 <select id="member"
 onchange="manualMemberSelect()">
 
 <option value="">
-대원을 선택하세요
+검색 결과에서 대원을 선택하세요
 </option>
 
 </select>
@@ -367,12 +387,21 @@ const API =
 
 
 let members = [];
-
 let currentMember = null;
-
 let scanner = null;
-
 let scanning = false;
+
+
+// =============================================
+// 한글 초성
+// =============================================
+
+const CHOSUNG = [
+  "ㄱ","ㄲ","ㄴ","ㄷ","ㄸ",
+  "ㄹ","ㅁ","ㅂ","ㅃ","ㅅ",
+  "ㅆ","ㅇ","ㅈ","ㅉ","ㅊ",
+  "ㅋ","ㅌ","ㅍ","ㅎ"
+];
 
 
 // =============================================
@@ -382,7 +411,6 @@ let scanning = false;
 window.onload = function() {
 
   loadSites();
-
   loadMembers();
 
 };
@@ -436,7 +464,7 @@ async function loadSites() {
 
 
 // =============================================
-// 대원명단
+// 대원명단 불러오기
 // =============================================
 
 async function loadMembers() {
@@ -456,12 +484,139 @@ async function loadMembers() {
     members =
       data.members;
 
+  }
 
-    const select =
-      document.getElementById("member");
+  catch (error) {
+
+    console.error(error);
+
+  }
+
+}
 
 
-    members.forEach(function(member) {
+// =============================================
+// 초성 추출
+// =============================================
+
+function getChosung(text) {
+
+  let result = "";
+
+
+  for (const char of text) {
+
+    const code =
+      char.charCodeAt(0);
+
+
+    if (
+      code >= 0xAC00 &&
+      code <= 0xD7A3
+    ) {
+
+      const index =
+        Math.floor(
+          (code - 0xAC00) / 588
+        );
+
+      result +=
+        CHOSUNG[index];
+
+    }
+
+    else {
+
+      result += char;
+
+    }
+
+  }
+
+
+  return result;
+
+}
+
+
+// =============================================
+// 대원 검색
+// =============================================
+
+function filterMembers() {
+
+  const input =
+    document
+      .getElementById("memberSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const select =
+    document
+      .getElementById("member");
+
+
+  select.innerHTML =
+    '<option value="">' +
+    '검색 결과에서 대원을 선택하세요' +
+    '</option>';
+
+
+  if (input === "") {
+
+    currentMember = null;
+
+    return;
+
+  }
+
+
+  const filtered =
+    members.filter(function(member) {
+
+      const name =
+        String(member.name || "")
+          .toLowerCase();
+
+      const chosung =
+        getChosung(
+          String(member.name || "")
+        );
+
+      const id =
+        String(member.id || "")
+          .toLowerCase();
+
+      const dept =
+        String(member.dept || "")
+          .toLowerCase();
+
+      const rank =
+        String(member.rank || "")
+          .toLowerCase();
+
+
+      return (
+
+        name.includes(input) ||
+
+        chosung.includes(input) ||
+
+        id.includes(input) ||
+
+        dept.includes(input) ||
+
+        rank.includes(input)
+
+      );
+
+    });
+
+
+  filtered.forEach(
+    function(member) {
 
       const option =
         document.createElement("option");
@@ -472,23 +627,33 @@ async function loadMembers() {
 
 
       option.textContent =
+
         member.name +
         " " +
         member.rank +
         " (" +
         member.id +
-        ")";
+        ") / " +
+        member.dept;
 
 
       select.appendChild(option);
 
-    });
+    }
+  );
 
-  }
 
-  catch (error) {
+  if (filtered.length === 1) {
 
-    console.error(error);
+    select.value =
+      filtered[0].id;
+
+    currentMember =
+      filtered[0];
+
+    showMember(
+      filtered[0]
+    );
 
   }
 
@@ -531,7 +696,6 @@ async function startScanner() {
     }
 
 
-    // 후면 카메라 우선
     let cameraId =
       cameras[cameras.length - 1].id;
 
@@ -575,8 +739,6 @@ async function startScanner() {
 
 
       function() {
-
-        // 인식 중 오류는 무시
 
       }
 
@@ -636,6 +798,15 @@ function findMemberByQR(id) {
 
   currentMember =
     member;
+
+
+  document
+    .getElementById("memberSearch")
+    .value =
+    member.name;
+
+
+  filterMembers();
 
 
   document
@@ -799,7 +970,7 @@ async function entryMember() {
   if (!currentMember) {
 
     alert(
-      "대원 QR을 스캔하거나 대원을 선택하세요."
+      "대원 QR을 스캔하거나 이름으로 검색하세요."
     );
 
     return;
@@ -925,7 +1096,7 @@ async function exitMember() {
   if (!currentMember) {
 
     alert(
-      "철수할 대원의 QR을 스캔하거나 선택하세요."
+      "철수할 대원을 QR 또는 검색으로 선택하세요."
     );
 
     return;
@@ -1018,13 +1189,21 @@ async function exitMember() {
 
 function resetNextMember() {
 
-  currentMember =
-    null;
+  currentMember = null;
+
+
+  document
+    .getElementById("memberSearch")
+    .value = "";
 
 
   document
     .getElementById("member")
-    .value = "";
+    .innerHTML =
+
+    '<option value="">' +
+    '검색 결과에서 대원을 선택하세요' +
+    '</option>';
 
 
   document
@@ -1047,7 +1226,7 @@ function resetNextMember() {
     .innerHTML =
 
     "📷 다음 대원의 QR을 스캔하거나<br>" +
-    "아래 목록에서 선택하세요.";
+    "이름·초성으로 검색하세요.";
 
 
   const status =
