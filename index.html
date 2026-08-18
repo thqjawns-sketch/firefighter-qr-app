@@ -3,9 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>소방대원 현장안전관리</title>
 
@@ -14,191 +12,324 @@ type="text/javascript"></script>
 
 <style>
 
-body {
-  margin: 0;
-  padding: 14px;
-  background: #f4f6f8;
-  font-family: Arial, sans-serif;
+body{
+  margin:0;
+  padding:14px;
+  background:#f4f6f8;
+  font-family:Arial,sans-serif;
 }
 
-.container {
-  max-width: 560px;
-  margin: auto;
+.container{
+  max-width:600px;
+  margin:auto;
 }
 
-.title {
-  background: #17365d;
-  color: white;
-  padding: 18px;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 14px;
+.title{
+  background:#17365d;
+  color:white;
+  padding:18px;
+  border-radius:12px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:14px;
 }
 
-.card {
-  background: white;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 14px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+.card{
+  background:white;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-top: 12px;
-  margin-bottom: 6px;
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:12px;
+  margin-bottom:6px;
 }
 
 select,
-input[type="text"] {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 13px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+input[type="text"]{
+  width:100%;
+  box-sizing:border-box;
+  padding:13px;
+  font-size:16px;
+  border:1px solid #ccc;
+  border-radius:8px;
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  border: 0;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: bold;
-  margin-top: 10px;
-  cursor: pointer;
+button{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:10px;
+  font-size:17px;
+  font-weight:bold;
+  margin-top:10px;
+  cursor:pointer;
 }
 
-.scan {
-  background: #17365d;
-  color: white;
+.dashboardBtn{
+  background:#f9ab00;
+  color:#222;
+  font-size:19px;
 }
 
-.entry {
-  background: #d93025;
-  color: white;
+.scan{
+  background:#17365d;
+  color:white;
 }
 
-.exit {
-  background: #188038;
-  color: white;
+.entry{
+  background:#d93025;
+  color:white;
 }
 
-.refresh {
-  background: #44546a;
-  color: white;
+.exit{
+  background:#188038;
+  color:white;
 }
 
-.selectAll {
-  background: #e8f0fe;
-  color: #17365d;
+.refresh{
+  background:#44546a;
+  color:white;
 }
 
-.batchExit {
-  background: #188038;
-  color: white;
+.batchExit{
+  background:#188038;
+  color:white;
 }
 
-#reader {
-  width: 100%;
-  margin-top: 12px;
+.selectAll{
+  background:#e8f0fe;
+  color:#17365d;
 }
 
-.memberInfo {
-  margin-top: 12px;
-  padding: 14px;
-  background: #e8f0fe;
-  border-radius: 10px;
-  text-align: center;
-  line-height: 1.6;
+.back{
+  background:#17365d;
+  color:white;
 }
 
-.memberName {
-  font-size: 21px;
-  font-weight: bold;
+#reader{
+  width:100%;
+  margin-top:12px;
 }
 
-.ppeBox {
-  padding: 14px;
-  margin-top: 10px;
-  background: #f5f7fa;
-  border-radius: 10px;
+.memberInfo{
+  margin-top:12px;
+  padding:14px;
+  background:#e8f0fe;
+  border-radius:10px;
+  text-align:center;
+  line-height:1.6;
 }
 
-.ppeBox label {
-  margin: 0;
-  font-size: 16px;
+.memberName{
+  font-size:21px;
+  font-weight:bold;
 }
 
-.ppeBox input {
-  transform: scale(1.3);
-  margin-right: 8px;
+.ppeBox{
+  padding:14px;
+  margin-top:10px;
+  background:#f5f7fa;
+  border-radius:10px;
 }
 
-.small {
-  font-size: 13px;
-  color: #666;
-  margin-left: 28px;
-  margin-top: 5px;
+.ppeBox label{
+  margin:0;
 }
 
-.status {
-  padding: 14px;
-  margin-top: 14px;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 10px;
-  background: #eee;
+.ppeBox input{
+  transform:scale(1.3);
+  margin-right:8px;
 }
 
-.insideTitle {
-  font-size: 20px;
-  font-weight: bold;
+.small{
+  font-size:13px;
+  color:#666;
+  margin-left:28px;
+  margin-top:5px;
 }
 
-.memberRow {
-  padding: 13px 4px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+.status{
+  padding:14px;
+  margin-top:14px;
+  text-align:center;
+  font-weight:bold;
+  border-radius:10px;
+  background:#eee;
 }
 
-.memberRow input[type="checkbox"] {
-  transform: scale(1.5);
-  margin-top: 6px;
+.insideTitle{
+  font-size:20px;
+  font-weight:bold;
 }
 
-.memberDetail {
-  flex: 1;
+.memberRow{
+  padding:13px 4px;
+  border-bottom:1px solid #ddd;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
 }
 
-.time {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #555;
+.memberRow input{
+  transform:scale(1.5);
+  margin-top:6px;
 }
 
-.warning {
-  color: #d93025;
-  font-weight: bold;
+.memberDetail{
+  flex:1;
 }
 
-.searchInfo {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #666;
+.time{
+  margin-top:4px;
+  font-size:14px;
+  color:#555;
 }
 
-.selectedCount {
-  margin-top: 12px;
-  text-align: center;
-  font-weight: bold;
-  color: #188038;
+.warning{
+  color:#d93025;
+  font-weight:bold;
+}
+
+.selectedCount{
+  text-align:center;
+  font-weight:bold;
+  margin-top:10px;
+  color:#188038;
+}
+
+
+/* ===============================
+   지휘관 현황
+================================ */
+
+#dashboardPage{
+  display:none;
+}
+
+.dashboardHeader{
+  background:#17365d;
+  color:white;
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:14px;
+  text-align:center;
+}
+
+.dashboardHeader .siteName{
+  font-size:23px;
+  font-weight:bold;
+}
+
+.summaryGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.summaryBox{
+  padding:17px 8px;
+  border-radius:10px;
+  text-align:center;
+  background:#f5f7fa;
+}
+
+.summaryNumber{
+  font-size:30px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.red{
+  color:#d93025;
+}
+
+.green{
+  color:#188038;
+}
+
+.blue{
+  color:#17365d;
+}
+
+.orange{
+  color:#e37400;
+}
+
+.sectionTitle{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.commandMember{
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  margin-bottom:10px;
+  background:#fff;
+}
+
+.commandMember.inside{
+  border-left:6px solid #d93025;
+}
+
+.commandMember.exited{
+  border-left:6px solid #188038;
+}
+
+.commandName{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.commandInfo{
+  margin-top:6px;
+  line-height:1.7;
+}
+
+.history{
+  background:#f5f7fa;
+  border-radius:8px;
+  padding:10px;
+  margin-top:10px;
+  display:none;
+}
+
+.historyRow{
+  padding:7px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.historyRow:last-child{
+  border-bottom:0;
+}
+
+.detailBtn{
+  background:#e8f0fe;
+  color:#17365d;
+  padding:9px;
+  font-size:14px;
+}
+
+.alert30{
+  background:#fce8e6;
+  color:#d93025;
+  padding:6px;
+  border-radius:6px;
+  margin-top:6px;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  color:#777;
+  padding:20px;
 }
 
 </style>
@@ -209,6 +340,13 @@ button {
 
 <div class="container">
 
+
+<!-- =================================================
+     일반 안전관리 화면
+================================================= -->
+
+<div id="mainPage">
+
 <div class="title">
 🚒 소방대원 현장안전관리
 </div>
@@ -218,8 +356,7 @@ button {
 
 <label>화재현장</label>
 
-<select id="site"
-onchange="loadInsideMembers()">
+<select id="site" onchange="loadInsideMembers()">
 
 <option value="">
 현장을 선택하세요
@@ -230,9 +367,19 @@ onchange="loadInsideMembers()">
 
 <label>안전점검관</label>
 
-<input type="text"
+<input
+type="text"
 id="officer"
 placeholder="안전점검관 성명">
+
+
+<button
+class="dashboardBtn"
+onclick="openDashboard()">
+
+📊 현장 현황
+
+</button>
 
 </div>
 
@@ -241,18 +388,20 @@ placeholder="안전점검관 성명">
 
 <h3>👨‍🚒 대원 확인</h3>
 
-<button class="scan"
+
+<button
+class="scan"
 onclick="startScanner()">
 
 📷 대원 QR 스캔
 
 </button>
 
+
 <div id="reader"></div>
 
 
-<div id="memberInfo"
-class="memberInfo">
+<div id="memberInfo" class="memberInfo">
 
 QR을 스캔하거나<br>
 이름·초성으로 대원을 검색하세요.
@@ -260,7 +409,9 @@ QR을 스캔하거나<br>
 </div>
 
 
-<label>이름 / 초성 / 관리번호 검색</label>
+<label>
+이름 / 초성 / 관리번호 검색
+</label>
 
 <input
 type="text"
@@ -269,14 +420,10 @@ placeholder="예: 김도윤 / ㄱㄷㅇ / FW-013"
 oninput="filterMembers()">
 
 
-<div class="searchInfo">
-검색어를 입력하면 일치하는 대원만 표시됩니다.
-</div>
-
-
 <label>검색 결과</label>
 
-<select id="member"
+<select
+id="member"
 onchange="manualMemberSelect()">
 
 <option value="">
@@ -297,7 +444,8 @@ onchange="manualMemberSelect()">
 
 <label>
 
-<input type="checkbox"
+<input
+type="checkbox"
 id="ppe1"
 onchange="checkPPE()">
 
@@ -316,7 +464,8 @@ onchange="checkPPE()">
 
 <label>
 
-<input type="checkbox"
+<input
+type="checkbox"
 id="ppe2"
 onchange="checkPPE()">
 
@@ -335,7 +484,8 @@ onchange="checkPPE()">
 
 <label>
 
-<input type="checkbox"
+<input
+type="checkbox"
 id="ppe3"
 onchange="checkPPE()">
 
@@ -350,11 +500,8 @@ PASS · 무전기 정상상태 확인
 </div>
 
 
-<div id="ppeStatus"
-class="status">
-
+<div id="ppeStatus" class="status">
 PPE 점검 대기
-
 </div>
 
 </div>
@@ -362,7 +509,8 @@ PPE 점검 대기
 
 <div class="card">
 
-<button class="entry"
+<button
+class="entry"
 onclick="entryMember()">
 
 🔴 진입 승인
@@ -370,10 +518,11 @@ onclick="entryMember()">
 </button>
 
 
-<button class="exit"
+<button
+class="exit"
 onclick="exitMember()">
 
-🟢 선택 대원 단독 철수
+🟢 검색 대원 단독 철수
 
 </button>
 
@@ -382,15 +531,15 @@ onclick="exitMember()">
 
 <div class="card">
 
-<div id="insideCount"
-class="insideTitle">
+<div id="insideCount" class="insideTitle">
 
 🔴 현재 현장 내부 0명
 
 </div>
 
 
-<button class="refresh"
+<button
+class="refresh"
 onclick="loadInsideMembers()">
 
 🔄 현황 새로고침
@@ -401,7 +550,8 @@ onclick="loadInsideMembers()">
 <div id="insideList"></div>
 
 
-<button class="selectAll"
+<button
+class="selectAll"
 onclick="toggleSelectAll()">
 
 ☑ 전체 선택 / 해제
@@ -409,8 +559,7 @@ onclick="toggleSelectAll()">
 </button>
 
 
-<div
-id="selectedCount"
+<div id="selectedCount"
 class="selectedCount">
 
 선택 대원 0명
@@ -418,7 +567,8 @@ class="selectedCount">
 </div>
 
 
-<button class="batchExit"
+<button
+class="batchExit"
 onclick="batchExitMembers()">
 
 🟢 선택 대원 일괄 철수처리
@@ -430,7 +580,163 @@ onclick="batchExitMembers()">
 </div>
 
 
+
+<!-- =================================================
+     지휘관 현장 현황
+================================================= -->
+
+<div id="dashboardPage">
+
+
+<div class="dashboardHeader">
+
+<div>
+🔥 현장 활동 현황
+</div>
+
+<div
+id="dashboardSiteName"
+class="siteName">
+
+-
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="summaryGrid">
+
+
+<div class="summaryBox">
+
+현재 내부
+
+<div
+id="dashInside"
+class="summaryNumber red">
+
+0
+
+</div>
+
+명
+
+</div>
+
+
+<div class="summaryBox">
+
+현장 참여대원
+
+<div
+id="dashUnique"
+class="summaryNumber blue">
+
+0
+
+</div>
+
+명
+
+</div>
+
+
+<div class="summaryBox">
+
+현재 철수
+
+<div
+id="dashExited"
+class="summaryNumber green">
+
+0
+
+</div>
+
+명
+
+</div>
+
+
+<div class="summaryBox">
+
+총 진입
+
+<div
+id="dashEntries"
+class="summaryNumber orange">
+
+0
+
+</div>
+
+회
+
+</div>
+
+
+</div>
+
+
+<button
+class="refresh"
+onclick="loadDashboard()">
+
+🔄 현황 새로고침
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="sectionTitle">
+
+🔴 현재 현장 내부 대원
+
+</div>
+
+<div id="dashboardInside"></div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="sectionTitle">
+
+🟢 철수 대원 / 활동이력
+
+</div>
+
+<div id="dashboardExited"></div>
+
+</div>
+
+
+<button
+class="back"
+onclick="closeDashboard()">
+
+⬅ 안전관리 화면으로 돌아가기
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
 <script>
+
 
 const API =
 "https://script.google.com/macros/s/AKfycbxTKCw24jpy-A2Z262fE005EXYBPohAWpjaw9NDcGE2RJhO6UGNs-LZrMzZTAVnE8zu/exec";
@@ -444,14 +750,15 @@ let selectAllState = false;
 
 
 const CHOSUNG = [
-  "ㄱ","ㄲ","ㄴ","ㄷ","ㄸ",
-  "ㄹ","ㅁ","ㅂ","ㅃ","ㅅ",
-  "ㅆ","ㅇ","ㅈ","ㅉ","ㅊ",
-  "ㅋ","ㅌ","ㅍ","ㅎ"
+"ㄱ","ㄲ","ㄴ","ㄷ","ㄸ",
+"ㄹ","ㅁ","ㅂ","ㅃ","ㅅ",
+"ㅆ","ㅇ","ㅈ","ㅉ","ㅊ",
+"ㅋ","ㅌ","ㅍ","ㅎ"
 ];
 
 
-window.onload = function() {
+
+window.onload = function(){
 
   loadSites();
   loadMembers();
@@ -459,24 +766,29 @@ window.onload = function() {
 };
 
 
-async function loadSites() {
 
-  try {
+// ==========================================
+// 현장
+// ==========================================
+
+async function loadSites(){
+
+  try{
 
     const response =
-      await fetch(API + "?action=sites");
+      await fetch(API+"?action=sites");
 
     const data =
       await response.json();
 
-    if (!data.success) return;
+    if(!data.success) return;
 
 
     const select =
       document.getElementById("site");
 
 
-    data.sites.forEach(function(site) {
+    data.sites.forEach(function(site){
 
       const option =
         document.createElement("option");
@@ -493,7 +805,7 @@ async function loadSites() {
 
   }
 
-  catch (error) {
+  catch(error){
 
     console.error(error);
 
@@ -502,26 +814,28 @@ async function loadSites() {
 }
 
 
-async function loadMembers() {
 
-  try {
+// ==========================================
+// 대원
+// ==========================================
+
+async function loadMembers(){
+
+  try{
 
     const response =
-      await fetch(API + "?action=members");
+      await fetch(API+"?action=members");
 
     const data =
       await response.json();
 
+    if(!data.success) return;
 
-    if (!data.success) return;
-
-
-    members =
-      data.members;
+    members=data.members;
 
   }
 
-  catch (error) {
+  catch(error){
 
     console.error(error);
 
@@ -530,25 +844,24 @@ async function loadMembers() {
 }
 
 
-function getChosung(text) {
 
-  let result = "";
+function getChosung(text){
 
+  let result="";
 
-  for (const char of text) {
+  for(const char of text){
 
     const code =
       char.charCodeAt(0);
 
-
-    if (
-      code >= 0xAC00 &&
-      code <= 0xD7A3
-    ) {
+    if(
+      code>=0xAC00 &&
+      code<=0xD7A3
+    ){
 
       const index =
         Math.floor(
-          (code - 0xAC00) / 588
+          (code-0xAC00)/588
         );
 
       result +=
@@ -556,21 +869,21 @@ function getChosung(text) {
 
     }
 
-    else {
+    else{
 
-      result += char;
+      result+=char;
 
     }
 
   }
-
 
   return result;
 
 }
 
 
-function filterMembers() {
+
+function filterMembers(){
 
   const input =
     document
@@ -586,50 +899,52 @@ function filterMembers() {
 
 
   select.innerHTML =
-    '<option value="">' +
-    '검색 결과에서 대원을 선택하세요' +
-    '</option>';
+    '<option value="">검색 결과에서 대원을 선택하세요</option>';
 
 
-  if (input === "") {
+  if(input===""){
 
-    currentMember = null;
+    currentMember=null;
     return;
 
   }
 
 
   const filtered =
-    members.filter(function(member) {
+    members.filter(function(member){
 
       const name =
-        String(member.name || "")
+        String(member.name||"")
           .toLowerCase();
 
       const chosung =
         getChosung(
-          String(member.name || "")
+          String(member.name||"")
         );
 
       const id =
-        String(member.id || "")
+        String(member.id||"")
           .toLowerCase();
 
       const dept =
-        String(member.dept || "")
+        String(member.dept||"")
           .toLowerCase();
 
       const rank =
-        String(member.rank || "")
+        String(member.rank||"")
           .toLowerCase();
 
 
-      return (
+      return(
 
         name.includes(input) ||
+
         chosung.includes(input) ||
+
         id.includes(input) ||
+
         dept.includes(input) ||
+
         rank.includes(input)
 
       );
@@ -637,35 +952,29 @@ function filterMembers() {
     });
 
 
-  filtered.forEach(
-    function(member) {
+  filtered.forEach(function(member){
 
-      const option =
-        document.createElement("option");
+    const option =
+      document.createElement("option");
 
+    option.value =
+      member.id;
 
-      option.value =
-        member.id;
+    option.textContent =
+      member.name+
+      " "+
+      member.rank+
+      " ("+
+      member.id+
+      ") / "+
+      member.dept;
 
+    select.appendChild(option);
 
-      option.textContent =
-
-        member.name +
-        " " +
-        member.rank +
-        " (" +
-        member.id +
-        ") / " +
-        member.dept;
-
-
-      select.appendChild(option);
-
-    }
-  );
+  });
 
 
-  if (filtered.length === 1) {
+  if(filtered.length===1){
 
     select.value =
       filtered[0].id;
@@ -682,42 +991,97 @@ function filterMembers() {
 }
 
 
-async function startScanner() {
 
-  if (scanning) return;
+function manualMemberSelect(){
+
+  const id =
+    document
+      .getElementById("member")
+      .value;
+
+  if(!id){
+
+    currentMember=null;
+    return;
+
+  }
+
+  currentMember =
+    members.find(
+      m=>m.id===id
+    );
+
+  showMember(
+    currentMember
+  );
+
+}
 
 
-  const info =
-    document.getElementById("memberInfo");
+
+function showMember(member){
+
+  document
+    .getElementById("memberInfo")
+    .innerHTML =
+
+    "✅ 대원 확인 완료<br>"+
+
+    "<span class='memberName'>"+
+    member.name+
+    " "+
+    member.rank+
+    "</span><br>"+
+
+    member.id+
+    "<br>"+
+
+    member.dept;
+
+}
 
 
-  info.innerHTML =
-    "📷 카메라를 준비하고 있습니다...";
+
+// ==========================================
+// QR
+// ==========================================
+
+async function startScanner(){
+
+  if(scanning) return;
 
 
-  try {
+  try{
 
     scanner =
-      new Html5Qrcode("reader");
+      new Html5Qrcode(
+        "reader"
+      );
 
 
     const cameras =
-      await Html5Qrcode.getCameras();
+      await Html5Qrcode
+        .getCameras();
 
 
-    if (!cameras.length) {
+    if(!cameras.length){
 
-      alert("카메라를 찾을 수 없습니다.");
+      alert(
+        "카메라를 찾을 수 없습니다."
+      );
+
       return;
 
     }
 
 
-    let cameraId =
-      cameras[cameras.length - 1].id;
+    const cameraId =
+      cameras[
+        cameras.length-1
+      ].id;
 
 
-    scanning = true;
+    scanning=true;
 
 
     await scanner.start(
@@ -725,16 +1089,16 @@ async function startScanner() {
       cameraId,
 
       {
-        fps: 10,
+        fps:10,
 
-        qrbox: {
-          width: 250,
-          height: 250
+        qrbox:{
+          width:250,
+          height:250
         }
       },
 
 
-      async function(decodedText) {
+      async function(decodedText){
 
         const id =
           decodedText.trim();
@@ -742,12 +1106,12 @@ async function startScanner() {
 
         await scanner.stop();
 
-        scanning = false;
+        scanning=false;
 
 
         document
           .getElementById("reader")
-          .innerHTML = "";
+          .innerHTML="";
 
 
         findMemberByQR(id);
@@ -755,19 +1119,18 @@ async function startScanner() {
       },
 
 
-      function() {}
+      function(){}
 
     );
 
   }
 
-  catch (error) {
+  catch(error){
 
-    scanning = false;
+    scanning=false;
 
     alert(
-      "카메라 실행 오류\n" +
-      error
+      "카메라 실행 오류"
     );
 
   }
@@ -775,28 +1138,20 @@ async function startScanner() {
 }
 
 
-function findMemberByQR(id) {
+
+function findMemberByQR(id){
 
   const member =
-    members.find(function(m) {
+    members.find(
+      m=>
+        String(m.id).trim()===
+        String(id).trim()
+    );
 
-      return String(m.id).trim() ===
-             String(id).trim();
 
-    });
+  if(!member){
 
-
-  if (!member) {
-
-    currentMember = null;
-
-    document
-      .getElementById("memberInfo")
-      .innerHTML =
-
-      "⚠️ 등록되지 않은 QR입니다.<br>" +
-      id;
-
+    currentMember=null;
 
     alert(
       "등록되지 않은 대원 QR입니다."
@@ -807,8 +1162,7 @@ function findMemberByQR(id) {
   }
 
 
-  currentMember =
-    member;
+  currentMember=member;
 
 
   document
@@ -831,75 +1185,34 @@ function findMemberByQR(id) {
 }
 
 
-function manualMemberSelect() {
 
-  const id =
-    document
-      .getElementById("member")
-      .value;
+// ==========================================
+// PPE
+// ==========================================
 
-
-  if (!id) {
-
-    currentMember = null;
-    return;
-
-  }
-
-
-  const member =
-    members.find(function(m) {
-
-      return m.id === id;
-
-    });
-
-
-  currentMember =
-    member;
-
-
-  showMember(member);
-
-}
-
-
-function showMember(member) {
-
-  document
-    .getElementById("memberInfo")
-    .innerHTML =
-
-    "✅ 대원 확인 완료<br>" +
-
-    "<span class='memberName'>" +
-    member.name +
-    " " +
-    member.rank +
-    "</span><br>" +
-
-    member.id +
-    "<br>" +
-
-    member.dept;
-
-}
-
-
-function checkPPE() {
+function checkPPE(){
 
   const complete =
 
-    document.getElementById("ppe1").checked &&
-    document.getElementById("ppe2").checked &&
-    document.getElementById("ppe3").checked;
+    document
+      .getElementById("ppe1")
+      .checked &&
+
+    document
+      .getElementById("ppe2")
+      .checked &&
+
+    document
+      .getElementById("ppe3")
+      .checked;
 
 
   const status =
-    document.getElementById("ppeStatus");
+    document
+      .getElementById("ppeStatus");
 
 
-  if (complete) {
+  if(complete){
 
     status.innerHTML =
       "✅ PPE 점검완료 · 투입 가능";
@@ -912,7 +1225,7 @@ function checkPPE() {
 
   }
 
-  else {
+  else{
 
     status.innerHTML =
       "⚠️ PPE 점검 미완료 · 투입 보류";
@@ -928,10 +1241,17 @@ function checkPPE() {
 }
 
 
-async function entryMember() {
+
+// ==========================================
+// 진입
+// ==========================================
+
+async function entryMember(){
 
   const site =
-    document.getElementById("site").value;
+    document
+      .getElementById("site")
+      .value;
 
 
   const officer =
@@ -941,26 +1261,32 @@ async function entryMember() {
       .trim();
 
 
-  if (!site) {
-
-    alert("화재현장을 선택하세요.");
-    return;
-
-  }
-
-
-  if (!officer) {
-
-    alert("안전점검관 성명을 입력하세요.");
-    return;
-
-  }
-
-
-  if (!currentMember) {
+  if(!site){
 
     alert(
-      "대원 QR을 스캔하거나 이름으로 검색하세요."
+      "화재현장을 선택하세요."
+    );
+
+    return;
+
+  }
+
+
+  if(!officer){
+
+    alert(
+      "안전점검관 성명을 입력하세요."
+    );
+
+    return;
+
+  }
+
+
+  if(!currentMember){
+
+    alert(
+      "대원을 선택하세요."
     );
 
     return;
@@ -970,15 +1296,23 @@ async function entryMember() {
 
   const ppeOK =
 
-    document.getElementById("ppe1").checked &&
-    document.getElementById("ppe2").checked &&
-    document.getElementById("ppe3").checked;
+    document
+      .getElementById("ppe1")
+      .checked &&
+
+    document
+      .getElementById("ppe2")
+      .checked &&
+
+    document
+      .getElementById("ppe3")
+      .checked;
 
 
-  if (!ppeOK) {
+  if(!ppeOK){
 
     alert(
-      "PPE 3개 항목을 모두 확인해야 합니다."
+      "PPE 3개 항목을 모두 확인하세요."
     );
 
     return;
@@ -990,21 +1324,40 @@ async function entryMember() {
     new URLSearchParams();
 
 
-  form.append("action","entry");
-  form.append("site",site);
-  form.append("memberId",currentMember.id);
-  form.append("memberName",currentMember.name);
-  form.append("officer",officer);
+  form.append(
+    "action",
+    "entry"
+  );
+
+  form.append(
+    "site",
+    site
+  );
+
+  form.append(
+    "memberId",
+    currentMember.id
+  );
+
+  form.append(
+    "memberName",
+    currentMember.name
+  );
+
+  form.append(
+    "officer",
+    officer
+  );
 
 
-  try {
+  try{
 
     const response =
       await fetch(
         API,
         {
-          method: "POST",
-          body: form
+          method:"POST",
+          body:form
         }
       );
 
@@ -1013,23 +1366,25 @@ async function entryMember() {
       await response.json();
 
 
-    alert(data.message);
+    alert(
+      data.message
+    );
 
 
-    if (data.success) {
-
-      await loadInsideMembers();
+    if(data.success){
 
       resetNextMember();
+
+      await loadInsideMembers();
 
     }
 
   }
 
-  catch (error) {
+  catch(error){
 
     alert(
-      "진입 기록 중 오류가 발생했습니다."
+      "진입 기록 오류"
     );
 
   }
@@ -1037,24 +1392,103 @@ async function entryMember() {
 }
 
 
-async function exitMember() {
+
+// ==========================================
+// 1명 철수
+// ==========================================
+
+async function exitOneMember(
+  site,
+  id,
+  name
+){
+
+  const form =
+    new URLSearchParams();
+
+
+  form.append(
+    "action",
+    "exit"
+  );
+
+  form.append(
+    "site",
+    site
+  );
+
+  form.append(
+    "memberId",
+    id
+  );
+
+  form.append(
+    "memberName",
+    name
+  );
+
+  form.append(
+    "officer",
+    document
+      .getElementById("officer")
+      .value
+      .trim()
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        API,
+        {
+          method:"POST",
+          body:form
+        }
+      );
+
+
+    return await response.json();
+
+  }
+
+  catch(error){
+
+    return{
+      success:false,
+      message:
+        name+" 철수 처리 오류"
+    };
+
+  }
+
+}
+
+
+
+async function exitMember(){
 
   const site =
-    document.getElementById("site").value;
+    document
+      .getElementById("site")
+      .value;
 
 
-  if (!site) {
+  if(!site){
 
-    alert("화재현장을 선택하세요.");
+    alert(
+      "화재현장을 선택하세요."
+    );
+
     return;
 
   }
 
 
-  if (!currentMember) {
+  if(!currentMember){
 
     alert(
-      "철수할 대원을 QR 또는 검색으로 선택하세요."
+      "철수할 대원을 선택하세요."
     );
 
     return;
@@ -1070,10 +1504,12 @@ async function exitMember() {
     );
 
 
-  alert(result.message);
+  alert(
+    result.message
+  );
 
 
-  if (result.success) {
+  if(result.success){
 
     resetNextMember();
 
@@ -1084,69 +1520,218 @@ async function exitMember() {
 }
 
 
+
 // ==========================================
-// 대원 1명 철수 처리 공통 함수
+// 내부대원
 // ==========================================
 
-async function exitOneMember(
-  site,
-  memberId,
-  memberName
-) {
+async function loadInsideMembers(){
 
-  const form =
-    new URLSearchParams();
-
-
-  form.append("action","exit");
-  form.append("site",site);
-  form.append("memberId",memberId);
-  form.append("memberName",memberName);
-
-  form.append(
-    "officer",
+  const site =
     document
-      .getElementById("officer")
-      .value
-      .trim()
-  );
+      .getElementById("site")
+      .value;
 
 
-  try {
-
-    const response =
-      await fetch(
-        API,
-        {
-          method: "POST",
-          body: form
-        }
-      );
+  const list =
+    document
+      .getElementById("insideList");
 
 
-    return await response.json();
+  list.innerHTML="";
+
+
+  if(!site){
+
+    document
+      .getElementById("insideCount")
+      .innerHTML =
+      "🔴 현재 현장 내부 0명";
+
+    updateSelectedCount();
+
+    return;
 
   }
 
-  catch (error) {
 
-    return {
-      success: false,
-      message:
-        memberName +
-        " 철수 처리 오류"
-    };
+  try{
+
+    const response =
+      await fetch(
+
+        API+
+        "?action=inside&site="+
+        encodeURIComponent(site)
+
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!data.success) return;
+
+
+    document
+      .getElementById("insideCount")
+      .innerHTML =
+
+      "🔴 현재 현장 내부 "+
+      data.members.length+
+      "명";
+
+
+    data.members.forEach(
+      function(member){
+
+        const row =
+          document
+            .createElement("div");
+
+
+        row.className =
+          "memberRow";
+
+
+        let warning="";
+
+
+        if(
+          member.currentMinutes>=30
+        ){
+
+          warning =
+
+            "<div class='warning'>"+
+            "⚠️ 현재 체류 30분 이상"+
+            "</div>";
+
+        }
+
+
+        row.innerHTML =
+
+          "<input "+
+          "type='checkbox' "+
+          "class='insideCheck' "+
+
+          "data-id='"+
+          member.memberId+
+          "' "+
+
+          "data-name='"+
+          member.memberName+
+          "' "+
+
+          "onchange='updateSelectedCount()'>"+
+
+
+          "<div class='memberDetail'>"+
+
+          "<b>"+
+          member.memberName+
+          "</b> "+
+
+          "("+
+          member.memberId+
+          ")"+
+
+          "<div class='time'>"+
+
+          "진입 "+
+          member.entryTime+
+
+          " / 현재 "+
+          member.currentMinutes+
+          "분"+
+
+          " / "+
+          member.entryCount+
+          "회차"+
+
+          "</div>"+
+
+          warning+
+
+          "</div>";
+
+
+        list.appendChild(row);
+
+      }
+    );
+
+
+    selectAllState=false;
+
+    updateSelectedCount();
+
+  }
+
+  catch(error){
+
+    console.error(error);
 
   }
 
 }
 
 
+
 // ==========================================
-// 다중 철수
+// 일괄 철수
 // ==========================================
 
-async function batchExitMembers() {
+function toggleSelectAll(){
+
+  const boxes =
+    document.querySelectorAll(
+      ".insideCheck"
+    );
+
+
+  selectAllState =
+    !selectAllState;
+
+
+  boxes.forEach(
+    box=>
+      box.checked=
+        selectAllState
+  );
+
+
+  updateSelectedCount();
+
+}
+
+
+
+function updateSelectedCount(){
+
+  const count =
+    document.querySelectorAll(
+      ".insideCheck:checked"
+    ).length;
+
+
+  document
+    .getElementById(
+      "selectedCount"
+    )
+    .innerHTML =
+
+    "선택 대원 "+
+    count+
+    "명";
+
+}
+
+
+
+async function batchExitMembers(){
 
   const site =
     document
@@ -1161,17 +1746,23 @@ async function batchExitMembers() {
       .trim();
 
 
-  if (!site) {
+  if(!site){
 
-    alert("화재현장을 선택하세요.");
+    alert(
+      "화재현장을 선택하세요."
+    );
+
     return;
 
   }
 
 
-  if (!officer) {
+  if(!officer){
 
-    alert("안전점검관 성명을 입력하세요.");
+    alert(
+      "안전점검관 성명을 입력하세요."
+    );
+
     return;
 
   }
@@ -1183,10 +1774,12 @@ async function batchExitMembers() {
     );
 
 
-  if (checked.length === 0) {
+  if(
+    checked.length===0
+  ){
 
     alert(
-      "철수 처리할 대원을 선택하세요."
+      "철수 대원을 선택하세요."
     );
 
     return;
@@ -1194,35 +1787,24 @@ async function batchExitMembers() {
   }
 
 
-  const names =
-    Array.from(checked)
-      .map(function(box) {
-
-        return box.dataset.name;
-
-      });
-
-
-  const confirmMessage =
-
-    names.join(", ") +
-    "\n\n총 " +
-    names.length +
-    "명을 철수 처리하시겠습니까?";
-
-
-  if (!confirm(confirmMessage)) {
+  if(
+    !confirm(
+      checked.length+
+      "명을 철수 처리하시겠습니까?"
+    )
+  ){
 
     return;
 
   }
 
 
-  let successCount = 0;
-  let failed = [];
+  let successCount=0;
 
 
-  for (const box of checked) {
+  for(
+    const box of checked
+  ){
 
     const result =
       await exitOneMember(
@@ -1236,149 +1818,91 @@ async function batchExitMembers() {
       );
 
 
-    if (result.success) {
+    if(
+      result.success
+    ){
 
       successCount++;
 
     }
 
-    else {
-
-      failed.push(
-        box.dataset.name
-      );
-
-    }
-
   }
 
 
-  let message =
-    "✅ " +
-    successCount +
-    "명 철수 처리 완료";
+  alert(
+    "✅ "+
+    successCount+
+    "명 철수 처리 완료"
+  );
 
-
-  if (failed.length > 0) {
-
-    message +=
-
-      "\n\n⚠️ 처리 실패 : " +
-      failed.join(", ");
-
-  }
-
-
-  alert(message);
-
-
-  selectAllState = false;
 
   await loadInsideMembers();
 
 }
 
 
-// ==========================================
-// 전체 선택/해제
-// ==========================================
-
-function toggleSelectAll() {
-
-  const boxes =
-    document.querySelectorAll(
-      ".insideCheck"
-    );
-
-
-  selectAllState =
-    !selectAllState;
-
-
-  boxes.forEach(
-    function(box) {
-
-      box.checked =
-        selectAllState;
-
-    }
-  );
-
-
-  updateSelectedCount();
-
-}
-
 
 // ==========================================
-// 선택 인원 표시
+// 입력 초기화
 // ==========================================
 
-function updateSelectedCount() {
+function resetNextMember(){
 
-  const count =
-    document.querySelectorAll(
-      ".insideCheck:checked"
-    ).length;
+  currentMember=null;
 
 
   document
     .getElementById(
-      "selectedCount"
+      "memberSearch"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "member"
     )
     .innerHTML =
 
-    "선택 대원 " +
-    count +
-    "명";
-
-}
-
-
-function resetNextMember() {
-
-  currentMember = null;
+    '<option value="">검색 결과에서 대원을 선택하세요</option>';
 
 
   document
-    .getElementById("memberSearch")
-    .value = "";
+    .getElementById(
+      "ppe1"
+    )
+    .checked=false;
 
 
   document
-    .getElementById("member")
+    .getElementById(
+      "ppe2"
+    )
+    .checked=false;
+
+
+  document
+    .getElementById(
+      "ppe3"
+    )
+    .checked=false;
+
+
+  document
+    .getElementById(
+      "memberInfo"
+    )
     .innerHTML =
 
-    '<option value="">' +
-    '검색 결과에서 대원을 선택하세요' +
-    '</option>';
-
-
-  document
-    .getElementById("ppe1")
-    .checked = false;
-
-
-  document
-    .getElementById("ppe2")
-    .checked = false;
-
-
-  document
-    .getElementById("ppe3")
-    .checked = false;
-
-
-  document
-    .getElementById("memberInfo")
-    .innerHTML =
-
-    "📷 다음 대원의 QR을 스캔하거나<br>" +
+    "📷 다음 대원의 QR을 스캔하거나<br>"+
     "이름·초성으로 검색하세요.";
 
 
   const status =
-    document.getElementById("ppeStatus");
+    document
+      .getElementById(
+        "ppeStatus"
+      );
 
 
   status.innerHTML =
@@ -1386,49 +1910,121 @@ function resetNextMember() {
 
 
   status.style.background =
-    "#eeeeee";
+    "#eee";
 
 
   status.style.color =
-    "#333333";
+    "#333";
 
 }
 
 
-async function loadInsideMembers() {
+
+// ==========================================
+// 지휘관 현황 열기
+// ==========================================
+
+function openDashboard(){
 
   const site =
-    document.getElementById("site").value;
-
-
-  if (!site) {
-
     document
-      .getElementById("insideCount")
-      .innerHTML =
-      "🔴 현재 현장 내부 0명";
+      .getElementById("site")
+      .value;
 
 
-    document
-      .getElementById("insideList")
-      .innerHTML =
-      "";
+  if(!site){
 
-
-    updateSelectedCount();
+    alert(
+      "먼저 화재현장을 선택하세요."
+    );
 
     return;
 
   }
 
 
-  try {
+  document
+    .getElementById("mainPage")
+    .style.display="none";
+
+
+  document
+    .getElementById(
+      "dashboardPage"
+    )
+    .style.display="block";
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+
+  loadDashboard();
+
+}
+
+
+
+function closeDashboard(){
+
+  document
+    .getElementById(
+      "dashboardPage"
+    )
+    .style.display="none";
+
+
+  document
+    .getElementById(
+      "mainPage"
+    )
+    .style.display="block";
+
+
+  loadInsideMembers();
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+
+// ==========================================
+// 지휘관 현황 불러오기
+// ==========================================
+
+async function loadDashboard(){
+
+  const site =
+    document
+      .getElementById("site")
+      .value;
+
+
+  if(!site) return;
+
+
+  document
+    .getElementById(
+      "dashboardSiteName"
+    )
+    .innerText =
+    site;
+
+
+  try{
 
     const response =
       await fetch(
 
-        API +
-        "?action=inside&site=" +
+        API+
+        "?action=dashboard&site="+
         encodeURIComponent(site)
 
       );
@@ -1438,108 +2034,398 @@ async function loadInsideMembers() {
       await response.json();
 
 
-    if (!data.success) return;
+    if(
+      !data.success
+    ){
+
+      alert(
+        "현장 현황을 불러오지 못했습니다."
+      );
+
+      return;
+
+    }
 
 
-    const list =
-      document.getElementById("insideList");
-
-
-    list.innerHTML = "";
+    const dash =
+      data.dashboard;
 
 
     document
-      .getElementById("insideCount")
-      .innerHTML =
-
-      "🔴 현재 현장 내부 " +
-      data.members.length +
-      "명";
-
-
-    data.members.forEach(
-      function(member) {
-
-        const row =
-          document.createElement("div");
+      .getElementById(
+        "dashInside"
+      )
+      .innerText =
+      dash.insideCount;
 
 
-        row.className =
-          "memberRow";
+    document
+      .getElementById(
+        "dashUnique"
+      )
+      .innerText =
+      dash.uniqueMemberCount;
 
 
-        let warning = "";
+    document
+      .getElementById(
+        "dashExited"
+      )
+      .innerText =
+      dash.exitedCount;
 
 
-        if (
-          member.activityMinutes >= 30
-        ) {
-
-          warning =
-            "<span class='warning'>" +
-            "⚠️ 장시간 활동" +
-            "</span>";
-
-        }
+    document
+      .getElementById(
+        "dashEntries"
+      )
+      .innerText =
+      dash.totalEntryCount;
 
 
-        row.innerHTML =
-
-          "<input " +
-          "type='checkbox' " +
-          "class='insideCheck' " +
-
-          "data-id='" +
-          member.memberId +
-          "' " +
-
-          "data-name='" +
-          member.memberName +
-          "' " +
-
-          "onchange='updateSelectedCount()'>" +
-
-          "<div class='memberDetail'>" +
-
-          "<b>" +
-          member.memberName +
-          "</b>" +
-
-          " (" +
-          member.memberId +
-          ")" +
-
-          "<div class='time'>" +
-
-          "진입 " +
-          member.entryTime +
-
-          " / 활동 " +
-          member.activityMinutes +
-          "분 " +
-
-          warning +
-
-          "</div>" +
-
-          "</div>";
-
-
-        list.appendChild(row);
-
-      }
+    drawDashboardInside(
+      dash.insideMembers
     );
 
 
-    selectAllState = false;
-
-    updateSelectedCount();
+    drawDashboardExited(
+      dash.exitedMembers
+    );
 
   }
 
-  catch (error) {
+  catch(error){
 
     console.error(error);
+
+    alert(
+      "현장 현황 통신 오류"
+    );
+
+  }
+
+}
+
+
+
+// ==========================================
+// 지휘관 - 현재 내부
+// ==========================================
+
+function drawDashboardInside(
+  insideMembers
+){
+
+  const area =
+    document
+      .getElementById(
+        "dashboardInside"
+      );
+
+
+  area.innerHTML="";
+
+
+  if(
+    insideMembers.length===0
+  ){
+
+    area.innerHTML =
+      "<div class='empty'>"+
+      "현재 내부 대원이 없습니다."+
+      "</div>";
+
+    return;
+
+  }
+
+
+  insideMembers.forEach(
+    function(member){
+
+      const div =
+        document
+          .createElement("div");
+
+
+      div.className =
+        "commandMember inside";
+
+
+      let warning="";
+
+
+      if(
+        member.currentMinutes>=30
+      ){
+
+        warning =
+
+          "<div class='alert30'>"+
+          "⚠️ 현재 체류 30분 이상"+
+          "</div>";
+
+      }
+
+
+      const historyId =
+        "history_"+
+        member.memberId+
+        "_inside";
+
+
+      div.innerHTML =
+
+        "<div class='commandName'>"+
+        "🔴 "+
+        member.memberName+
+        " ("+
+        member.memberId+
+        ")"+
+        "</div>"+
+
+
+        "<div class='commandInfo'>"+
+
+        "현재 상태 : <b>현장 내부</b><br>"+
+
+        "현재 체류 : <b>"+
+        member.currentMinutes+
+        "분</b><br>"+
+
+        "진입 횟수 : "+
+        member.entryCount+
+        "회<br>"+
+
+        "이전 활동 : "+
+        member.completedMinutes+
+        "분<br>"+
+
+        "누적 활동 : <b>"+
+        member.totalMinutes+
+        "분</b>"+
+
+        "</div>"+
+
+        warning+
+
+        "<button "+
+        "class='detailBtn' "+
+        "onclick=\"toggleHistory('"+
+        historyId+
+        "')\">"+
+
+        "📋 진입·철수 이력 보기"+
+
+        "</button>"+
+
+        "<div "+
+        "id='"+
+        historyId+
+        "' "+
+        "class='history'>"+
+
+        makeHistoryHTML(
+          member.records
+        )+
+
+        "</div>";
+
+
+      area.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+
+// ==========================================
+// 지휘관 - 철수 대원
+// ==========================================
+
+function drawDashboardExited(
+  exitedMembers
+){
+
+  const area =
+    document
+      .getElementById(
+        "dashboardExited"
+      );
+
+
+  area.innerHTML="";
+
+
+  if(
+    exitedMembers.length===0
+  ){
+
+    area.innerHTML =
+      "<div class='empty'>"+
+      "철수 완료 대원이 없습니다."+
+      "</div>";
+
+    return;
+
+  }
+
+
+  exitedMembers.forEach(
+    function(member){
+
+      const div =
+        document
+          .createElement("div");
+
+
+      div.className =
+        "commandMember exited";
+
+
+      const historyId =
+        "history_"+
+        member.memberId+
+        "_exit";
+
+
+      div.innerHTML =
+
+        "<div class='commandName'>"+
+        "🟢 "+
+        member.memberName+
+        " ("+
+        member.memberId+
+        ")"+
+        "</div>"+
+
+
+        "<div class='commandInfo'>"+
+
+        "현재 상태 : <b>철수</b><br>"+
+
+        "총 진입 : "+
+        member.entryCount+
+        "회<br>"+
+
+        "누적 활동 : <b>"+
+        member.totalMinutes+
+        "분</b>"+
+
+        "</div>"+
+
+
+        "<button "+
+        "class='detailBtn' "+
+        "onclick=\"toggleHistory('"+
+        historyId+
+        "')\">"+
+
+        "📋 전체 활동이력 보기"+
+
+        "</button>"+
+
+
+        "<div "+
+        "id='"+
+        historyId+
+        "' "+
+        "class='history'>"+
+
+        makeHistoryHTML(
+          member.records
+        )+
+
+        "</div>";
+
+
+      area.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+
+// ==========================================
+// 활동 이력
+// ==========================================
+
+function makeHistoryHTML(
+  records
+){
+
+  let html="";
+
+
+  records.forEach(
+    function(record){
+
+      let state =
+        record.status ===
+        "진입중"
+        ? "🔴 현재 내부"
+        : "🟢 철수완료";
+
+
+      html +=
+
+        "<div class='historyRow'>"+
+
+        "<b>"+
+        record.sequence+
+        "차 진입</b><br>"+
+
+        record.entryTime+
+        " → "+
+        record.exitTime+
+        "<br>"+
+
+        "활동 "+
+        record.minutes+
+        "분 / "+
+        state+
+
+        "</div>";
+
+    }
+  );
+
+
+  return html;
+
+}
+
+
+
+function toggleHistory(id){
+
+  const box =
+    document
+      .getElementById(id);
+
+
+  if(
+    box.style.display===
+    "block"
+  ){
+
+    box.style.display=
+      "none";
+
+  }
+
+  else{
+
+    box.style.display=
+      "block";
 
   }
 
