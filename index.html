@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>소방현장 진입·철수 태그 관리앱</title>
 
-<script
-src="https://unpkg.com/html5-qrcode"
-type="text/javascript">
-</script>
-
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
 <style>
 
@@ -31,24 +22,41 @@ body{
   margin:auto;
 }
 
-.title{
+.title,
+.dashboardHeader{
   background:#17365d;
-  color:white;
+  color:#fff;
   padding:18px 12px;
   border-radius:12px;
   text-align:center;
-  font-size:22px;
   font-weight:bold;
   margin-bottom:10px;
 }
 
-.stationLogo{
-  background:white;
-  padding:10px 14px;
-  margin-bottom:14px;
+.title{
+  font-size:22px;
+}
+
+.dashboardTitle{
+  font-size:20px;
+}
+
+.siteName{
+  font-size:27px;
+  margin-top:10px;
+}
+
+.stationLogo,
+.card{
+  background:#fff;
   border-radius:12px;
+  margin-bottom:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.stationLogo{
+  padding:10px 14px;
   text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
 .stationLogo img{
@@ -56,26 +64,21 @@ body{
   width:100%;
   max-width:285px;
   height:auto;
-  margin:0 auto;
+  margin:auto;
 }
 
 .card{
-  background:white;
   padding:16px;
-  border-radius:12px;
-  margin-bottom:14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 label{
   display:block;
   font-weight:bold;
-  margin-top:12px;
-  margin-bottom:6px;
+  margin:12px 0 6px;
 }
 
 select,
-input[type="text"]{
+input[type=text]{
   width:100%;
   box-sizing:border-box;
   padding:13px;
@@ -98,42 +101,34 @@ button{
 .dashboardBtn{
   background:#f9ab00;
   color:#222;
-  font-size:19px;
 }
 
-.scan{
+.scan,
+.back{
   background:#17365d;
-  color:white;
+  color:#fff;
 }
 
 .entry{
   background:#d93025;
-  color:white;
+  color:#fff;
 }
 
-.exit{
+.exit,
+.batchExit{
   background:#188038;
-  color:white;
+  color:#fff;
 }
 
 .refresh{
   background:#44546a;
-  color:white;
+  color:#fff;
 }
 
-.selectAll{
+.selectAll,
+.detailBtn{
   background:#e8f0fe;
   color:#17365d;
-}
-
-.batchExit{
-  background:#188038;
-  color:white;
-}
-
-.back{
-  background:#17365d;
-  color:white;
 }
 
 #reader{
@@ -161,17 +156,11 @@ button{
   margin-top:4px;
 }
 
-
-/* =================================================
-   PPE
-================================================= */
-
 .ppeHeader{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:10px;
 }
 
 .ppeHeader h3{
@@ -183,7 +172,6 @@ button{
   border:1px solid #f9ab00;
   border-radius:9px;
   padding:9px 12px;
-  white-space:nowrap;
 }
 
 .ppeAllCheck label{
@@ -192,8 +180,6 @@ button{
   align-items:center;
   gap:8px;
   color:#17365d;
-  font-size:16px;
-  cursor:pointer;
 }
 
 .ppeAllCheck input{
@@ -232,27 +218,22 @@ button{
   background:#eee;
 }
 
-
-/* =================================================
-   현재 내부대원
-================================================= */
-
-.insideTitle{
+.insideTitle,
+.sectionTitle{
   font-size:20px;
   font-weight:bold;
 }
 
 .memberRow{
   padding:13px 8px;
-  border-bottom:1px solid #ddd;
+  margin-bottom:5px;
+  border-radius:8px;
   display:flex;
   align-items:flex-start;
   gap:10px;
-  border-radius:8px;
-  margin-bottom:5px;
 }
 
-.memberRow input{
+.memberRow>input{
   transform:scale(1.5);
   margin-top:6px;
 }
@@ -264,7 +245,6 @@ button{
 .memberLine{
   font-size:17px;
   font-weight:bold;
-  line-height:1.5;
 }
 
 .time{
@@ -279,11 +259,6 @@ button{
   margin-top:10px;
   color:#188038;
 }
-
-
-/* =================================================
-   체류시간 경고
-================================================= */
 
 .stayBadge{
   display:inline-block;
@@ -314,57 +289,28 @@ button{
 
 .stayCritical{
   background:#d93025;
-  color:white;
+  color:#fff;
   border-left:6px solid #8b0000;
   animation:dangerBlink 1s infinite;
 }
 
 @keyframes dangerBlink{
 
-  0%{
+  0%,
+  100%{
     background:#d93025;
-    color:white;
+    color:#fff;
   }
 
   50%{
-    background:#ffffff;
+    background:#fff;
     color:#d93025;
   }
 
-  100%{
-    background:#d93025;
-    color:white;
-  }
-
 }
-
-
-/* =================================================
-   지휘관 현황
-================================================= */
 
 #dashboardPage{
   display:none;
-}
-
-.dashboardHeader{
-  background:#17365d;
-  color:white;
-  padding:18px;
-  border-radius:12px;
-  margin-bottom:10px;
-  text-align:center;
-}
-
-.dashboardHeader .dashboardTitle{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.dashboardHeader .siteName{
-  font-size:27px;
-  font-weight:bold;
-  margin-top:10px;
 }
 
 .summaryGrid{
@@ -402,10 +348,32 @@ button{
   color:#e37400;
 }
 
+.staySummaryTitle{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
 
-/* =================================================
-   즉시확인 대상
-================================================= */
+.staySummaryRows{
+  max-width:170px;
+  margin:auto;
+  text-align:left;
+}
+
+.staySummaryRow{
+  display:flex;
+  justify-content:space-between;
+  gap:6px;
+  padding:4px 0;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.staySummaryCount{
+  min-width:34px;
+  text-align:right;
+  font-size:16px;
+}
 
 .criticalSummary{
   margin-top:14px;
@@ -421,22 +389,10 @@ button{
 
 .criticalSummary.hasCritical{
   background:#d93025;
-  color:white;
+  color:#fff;
   border-color:#8b0000;
   animation:dangerBlink 1s infinite;
 }
-
-.autoRefreshInfo{
-  margin-top:10px;
-  text-align:center;
-  font-size:13px;
-  color:#666;
-}
-
-
-/* =================================================
-   안전 안내
-================================================= */
 
 .safetyNotice{
   margin-top:12px;
@@ -448,17 +404,6 @@ button{
   font-size:14px;
   line-height:1.5;
   font-weight:bold;
-}
-
-
-/* =================================================
-   현황 대원카드
-================================================= */
-
-.sectionTitle{
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:10px;
 }
 
 .commandMember{
@@ -476,13 +421,6 @@ button{
 .commandName{
   font-size:19px;
   font-weight:bold;
-  line-height:1.5;
-}
-
-.commandId{
-  font-size:14px;
-  color:#666;
-  margin-top:3px;
 }
 
 .commandInfo{
@@ -508,8 +446,6 @@ button{
 }
 
 .detailBtn{
-  background:#e8f0fe;
-  color:#17365d;
   padding:9px;
   font-size:14px;
 }
@@ -524,26 +460,18 @@ button{
 
 </head>
 
-
-
 <body>
 
 <div class="container">
 
 
-<!-- =================================================
-     메인 화면
-================================================= -->
+<!-- 메인 화면 -->
 
 <div id="mainPage">
 
-
 <div class="title">
-
 🚒 소방현장 진입·철수 태그 관리앱
-
 </div>
-
 
 <div class="stationLogo">
 
@@ -554,14 +482,9 @@ alt="완주소방서 WANJU FIRE STATION">
 </div>
 
 
-
 <div class="card">
 
-
-<label>
-화재현장
-</label>
-
+<label>화재현장</label>
 
 <select
 id="site"
@@ -574,17 +497,12 @@ onchange="siteChanged()">
 </select>
 
 
-
-<label>
-안전점검관
-</label>
-
+<label>안전점검관</label>
 
 <input
 type="text"
 id="officer"
 placeholder="안전점검관 성명">
-
 
 
 <button
@@ -595,17 +513,13 @@ onclick="openDashboard()">
 
 </button>
 
-
 </div>
 
 
 
-<!-- =================================================
-     대원 확인
-================================================= -->
+<!-- 대원 확인 -->
 
 <div class="card">
-
 
 <h3>
 👨‍🚒 대원 확인
@@ -648,7 +562,6 @@ placeholder="예: 김학용 / ㄱㅎㅇ / FW-013"
 oninput="filterMembers()">
 
 
-
 <label>
 검색 결과
 </label>
@@ -664,20 +577,15 @@ onchange="manualMemberSelect()">
 
 </select>
 
-
 </div>
 
 
 
-<!-- =================================================
-     PPE
-================================================= -->
+<!-- PPE -->
 
 <div class="card">
 
-
 <div class="ppeHeader">
-
 
 <h3>
 🦺 PPE 안전점검
@@ -699,13 +607,10 @@ onchange="togglePPEAll(this)">
 
 </div>
 
-
 </div>
 
 
-
 <div class="ppeBox">
-
 
 <label>
 
@@ -719,20 +624,14 @@ onchange="checkPPE()">
 
 </label>
 
-
 <div class="small">
-
 방화복 · 헬멧 · 두건 · 장갑 · 안전화
-
 </div>
 
-
 </div>
-
 
 
 <div class="ppeBox">
-
 
 <label>
 
@@ -746,20 +645,14 @@ onchange="checkPPE()">
 
 </label>
 
-
 <div class="small">
-
 공기호흡기 · 면체 정상상태 확인
-
 </div>
 
-
 </div>
-
 
 
 <div class="ppeBox">
-
 
 <label>
 
@@ -773,16 +666,11 @@ onchange="checkPPE()">
 
 </label>
 
-
 <div class="small">
-
 PASS · 무전기 정상상태 확인
-
 </div>
 
-
 </div>
-
 
 
 <div
@@ -793,17 +681,13 @@ PPE 점검 대기
 
 </div>
 
-
 </div>
 
 
 
-<!-- =================================================
-     진입 / 철수
-================================================= -->
+<!-- 진입 / 철수 -->
 
 <div class="card">
-
 
 <button
 class="entry"
@@ -822,17 +706,13 @@ onclick="exitMember()">
 
 </button>
 
-
 </div>
 
 
 
-<!-- =================================================
-     현재 내부대원
-================================================= -->
+<!-- 현재 내부 -->
 
 <div class="card">
-
 
 <div
 id="insideCount"
@@ -850,13 +730,6 @@ onclick="loadInsideMembers()">
 🔄 현황 새로고침
 
 </button>
-
-
-<div class="autoRefreshInfo">
-
-⏱ 현황은 1분마다 자동 갱신됩니다.
-
-</div>
 
 
 <div id="insideList">
@@ -896,30 +769,22 @@ onclick="batchExitMembers()">
 
 </div>
 
+</div>
 
 </div>
 
 
-</div>
 
-
-
-<!-- =================================================
-     지휘관 현황
-================================================= -->
+<!-- 현장 현황 -->
 
 <div id="dashboardPage">
 
 
 <div class="dashboardHeader">
 
-
 <div class="dashboardTitle">
-
 🔥 현장 활동 현황
-
 </div>
-
 
 <div
 id="dashboardSiteName"
@@ -929,9 +794,7 @@ class="siteName">
 
 </div>
 
-
 </div>
-
 
 
 <div class="stationLogo">
@@ -941,7 +804,6 @@ src="wanju-logo.png"
 alt="완주소방서 WANJU FIRE STATION">
 
 </div>
-
 
 
 <div class="card">
@@ -1006,43 +868,81 @@ class="summaryNumber green">
 
 <div class="summaryBox">
 
-총 진입
+<div class="staySummaryTitle">
 
-<div
-id="dashEntries"
-class="summaryNumber orange">
-
-0
-
-</div>
-
-회
+현재 내부 체류시간
 
 </div>
 
 
+<div class="staySummaryRows">
+
+
+<div class="staySummaryRow">
+
+<span>
+🟢 0~20분
+</span>
+
+<span
+id="stayGreenCount"
+class="staySummaryCount green">
+
+0명
+
+</span>
+
 </div>
 
 
+<div class="staySummaryRow">
 
-<!-- 즉시확인 대상 -->
+<span>
+🟠 21~25분
+</span>
+
+<span
+id="stayOrangeCount"
+class="staySummaryCount orange">
+
+0명
+
+</span>
+
+</div>
+
+
+<div class="staySummaryRow">
+
+<span>
+🔴 26~30분
+</span>
+
+<span
+id="stayRedCount"
+class="staySummaryCount red">
+
+0명
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
 
 <div
 id="criticalSummary"
 class="criticalSummary">
 
-✅ 즉시 확인 대상 0명
+✅ 31분 이상 즉시 확인 대상 0명
 
 </div>
-
-
-
-<div class="autoRefreshInfo">
-
-⏱ 현장 현황은 1분마다 자동 갱신됩니다.
-
-</div>
-
 
 
 <div class="safetyNotice">
@@ -1050,7 +950,6 @@ class="criticalSummary">
 ※ 실제 철수 판단은 공기호흡기 잔압·경보 및 현장상황을 우선함
 
 </div>
-
 
 
 <button
@@ -1062,7 +961,6 @@ onclick="loadDashboard()">
 </button>
 
 
-
 <button
 class="back"
 onclick="closeDashboard()">
@@ -1071,17 +969,11 @@ onclick="closeDashboard()">
 
 </button>
 
-
 </div>
 
 
 
-<!-- =================================================
-     내부대원
-================================================= -->
-
 <div class="card">
-
 
 <div class="sectionTitle">
 
@@ -1089,21 +981,14 @@ onclick="closeDashboard()">
 
 </div>
 
-
 <div id="dashboardInside">
 </div>
 
-
 </div>
 
 
 
-<!-- =================================================
-     철수대원
-================================================= -->
-
 <div class="card">
-
 
 <div class="sectionTitle">
 
@@ -1111,13 +996,10 @@ onclick="closeDashboard()">
 
 </div>
 
-
 <div id="dashboardExited">
 </div>
 
-
 </div>
-
 
 
 <button
@@ -1128,9 +1010,7 @@ onclick="closeDashboard()">
 
 </button>
 
-
 </div>
-
 
 </div>
 
@@ -1138,10 +1018,6 @@ onclick="closeDashboard()">
 
 <script>
 
-
-// =====================================================
-// API
-// =====================================================
 
 const API =
 "https://script.google.com/macros/s/AKfycbxTKCw24jpy-A2Z262fE005EXYBPohAWpjaw9NDcGE2RJhO6UGNs-LZrMzZTAVnE8zu/exec";
@@ -1157,7 +1033,12 @@ let scanning = false;
 
 let selectAllState = false;
 
-let autoRefreshTimer = null;
+
+/* 중복 요청 방지 */
+
+let insideLoading = false;
+
+let dashboardLoading = false;
 
 
 const CHOSUNG = [
@@ -1174,9 +1055,8 @@ const CHOSUNG = [
 
 
 
-// =====================================================
 // 앱 시작
-// =====================================================
+// 자동갱신 없음
 
 window.onload =
 function(){
@@ -1185,83 +1065,11 @@ function(){
 
   loadMembers();
 
-  startAutoRefresh();
-
 };
 
 
 
-// =====================================================
-// 1분 자동갱신
-// =====================================================
-
-function startAutoRefresh(){
-
-
-  if(autoRefreshTimer){
-
-    clearInterval(
-      autoRefreshTimer
-    );
-
-  }
-
-
-  autoRefreshTimer =
-    setInterval(
-      function(){
-
-        const site =
-          document
-            .getElementById(
-              "site"
-            )
-            .value;
-
-
-        if(!site){
-
-          return;
-
-        }
-
-
-        const dashboardVisible =
-
-          document
-            .getElementById(
-              "dashboardPage"
-            )
-            .style
-            .display ===
-            "block";
-
-
-        if(dashboardVisible){
-
-          loadDashboard();
-
-        }
-
-        else{
-
-          loadInsideMembers();
-
-        }
-
-      },
-
-      60000
-
-    );
-
-}
-
-
-
-// =====================================================
 // 현장 변경
-// =====================================================
 
 function siteChanged(){
 
@@ -1271,15 +1079,12 @@ function siteChanged(){
 
 
 
-// =====================================================
 // 체류시간 상태
-// 0~20분 정상
-// 21~25분 주의
-// 26~30분 경고
-// 31분 이상 즉시 확인
-// =====================================================
 
 function getStayStatus(minutes){
+
+  minutes =
+    Number(minutes) || 0;
 
 
   if(minutes <= 20){
@@ -1341,106 +1146,82 @@ function getStayStatus(minutes){
 
 
 
-// =====================================================
 // 대원정보
-// =====================================================
 
 function getMemberInfoById(id){
 
+  return (
 
-  const found =
     members.find(
       function(member){
 
         return(
 
-          String(
-            member.id
-          ).trim()
+          String(member.id).trim()
 
           ===
 
-          String(
-            id
-          ).trim()
+          String(id).trim()
 
         );
 
       }
-    );
+    )
 
+    ||
 
-  if(found){
+    {
 
-    return found;
+      id:id || "",
 
-  }
+      name:"",
 
+      rank:"",
 
-  return{
+      dept:""
 
-    id:id || "",
+    }
 
-    name:"",
-
-    rank:"",
-
-    dept:""
-
-  };
+  );
 
 }
 
 
 
-// =====================================================
-// 이름 계급 / 부서
-// =====================================================
+// 이름 + 계급 / 부서
 
 function getMemberDisplay(
-  memberId,
+  id,
   fallbackName
 ){
 
-
-  const info =
-    getMemberInfoById(
-      memberId
-    );
-
-
-  const name =
-    info.name ||
-    fallbackName ||
-    "";
-
-
-  const rank =
-    info.rank || "";
-
-
-  const dept =
-    info.dept || "";
+  const member =
+    getMemberInfoById(id);
 
 
   let text =
-    name;
+
+    member.name ||
+
+    fallbackName ||
+
+    "";
 
 
-  if(rank){
+  if(member.rank){
 
     text +=
       " " +
-      rank;
+      member.rank;
 
   }
 
 
-  if(dept){
+  if(member.dept){
 
     text +=
       " / " +
-      dept;
+      member.dept;
 
   }
 
@@ -1451,21 +1232,16 @@ function getMemberDisplay(
 
 
 
-// =====================================================
 // 현장목록
-// =====================================================
 
 async function loadSites(){
-
 
   try{
 
     const response =
       await fetch(
-
         API +
         "?action=sites"
-
       );
 
 
@@ -1489,7 +1265,6 @@ async function loadSites(){
 
     data.sites.forEach(
       function(site){
-
 
         const option =
           document.createElement(
@@ -1526,21 +1301,16 @@ async function loadSites(){
 
 
 
-// =====================================================
 // 대원목록
-// =====================================================
 
 async function loadMembers(){
-
 
   try{
 
     const response =
       await fetch(
-
         API +
         "?action=members"
-
       );
 
 
@@ -1569,53 +1339,35 @@ async function loadMembers(){
 
 
 
-// =====================================================
-// 초성
-// =====================================================
+// 초성 변환
 
 function getChosung(text){
-
 
   let result =
     "";
 
 
-  for(
-    const char of text
-  ){
-
+  for(const char of text){
 
     const code =
-      char.charCodeAt(
-        0
-      );
+      char.charCodeAt(0);
 
 
     if(
-
       code >= 0xAC00
 
       &&
 
       code <= 0xD7A3
-
     ){
 
-
-      const index =
-        Math.floor(
-
-          (code - 0xAC00)
-
-          /
-
-          588
-
-        );
-
-
       result +=
-        CHOSUNG[index];
+
+        CHOSUNG[
+          Math.floor(
+            (code - 0xAC00) / 588
+          )
+        ];
 
     }
 
@@ -1635,15 +1387,11 @@ function getChosung(text){
 
 
 
-// =====================================================
-// 대원검색
-// =====================================================
+// 대원 검색
 
 function filterMembers(){
 
-
   const input =
-
     document
       .getElementById(
         "memberSearch"
@@ -1654,7 +1402,6 @@ function filterMembers(){
 
 
   const select =
-
     document
       .getElementById(
         "member"
@@ -1662,15 +1409,10 @@ function filterMembers(){
 
 
   select.innerHTML =
-
-    '<option value="">' +
-
-    '검색 결과에서 대원을 선택하세요' +
-
-    '</option>';
+    '<option value="">검색 결과에서 대원을 선택하세요</option>';
 
 
-  if(input === ""){
+  if(!input){
 
     currentMember =
       null;
@@ -1681,66 +1423,49 @@ function filterMembers(){
 
 
   const filtered =
-
     members.filter(
       function(member){
 
+        return(
 
-        const name =
           String(
             member.name || ""
           )
-          .toLowerCase();
+          .toLowerCase()
+          .includes(input)
 
+          ||
 
-        const chosung =
           getChosung(
             String(
               member.name || ""
             )
-          );
+          )
+          .includes(input)
 
+          ||
 
-        const id =
           String(
             member.id || ""
           )
-          .toLowerCase();
+          .toLowerCase()
+          .includes(input)
 
+          ||
 
-        const dept =
           String(
             member.dept || ""
           )
-          .toLowerCase();
+          .toLowerCase()
+          .includes(input)
 
+          ||
 
-        const rank =
           String(
             member.rank || ""
           )
-          .toLowerCase();
-
-
-        return(
-
-          name.includes(input)
-
-          ||
-
-          chosung.includes(input)
-
-          ||
-
-          id.includes(input)
-
-          ||
-
-          dept.includes(input)
-
-          ||
-
-          rank.includes(input)
+          .toLowerCase()
+          .includes(input)
 
         );
 
@@ -1750,7 +1475,6 @@ function filterMembers(){
 
   filtered.forEach(
     function(member){
-
 
       const option =
         document.createElement(
@@ -1765,11 +1489,8 @@ function filterMembers(){
       option.textContent =
 
         getMemberDisplay(
-
           member.id,
-
           member.name
-
         )
 
         +
@@ -1789,10 +1510,7 @@ function filterMembers(){
   );
 
 
-  if(
-    filtered.length === 1
-  ){
-
+  if(filtered.length === 1){
 
     select.value =
       filtered[0].id;
@@ -1812,15 +1530,11 @@ function filterMembers(){
 
 
 
-// =====================================================
 // 직접선택
-// =====================================================
 
 function manualMemberSelect(){
 
-
   const id =
-
     document
       .getElementById(
         "member"
@@ -1839,7 +1553,6 @@ function manualMemberSelect(){
 
 
   currentMember =
-
     members.find(
       function(member){
 
@@ -1859,29 +1572,15 @@ function manualMemberSelect(){
 
 
 
-// =====================================================
-// 대원 표시
-// =====================================================
+// 선택대원 표시
 
 function showMember(member){
-
 
   if(!member){
 
     return;
 
   }
-
-
-  const displayName =
-
-    getMemberDisplay(
-
-      member.id,
-
-      member.name
-
-    );
 
 
   document
@@ -1894,7 +1593,12 @@ function showMember(member){
 
     "<span class='memberName'>" +
 
-    displayName +
+    getMemberDisplay(
+      member.id,
+      member.name
+    )
+
+    +
 
     "</span>" +
 
@@ -1908,23 +1612,21 @@ function showMember(member){
 
 
 
-// =====================================================
-// QR 카메라
-// =====================================================
+// QR 카메라 ON / OFF
 
 async function toggleScanner(){
-
 
   if(scanning){
 
     await stopScanner();
 
-    return;
-
   }
 
+  else{
 
-  await startScanner();
+    await startScanner();
+
+  }
 
 }
 
@@ -1932,9 +1634,7 @@ async function toggleScanner(){
 
 async function startScanner(){
 
-
   const button =
-
     document
       .getElementById(
         "scanButton"
@@ -1942,7 +1642,6 @@ async function startScanner(){
 
 
   try{
-
 
     scanner =
       new Html5Qrcode(
@@ -1955,10 +1654,7 @@ async function startScanner(){
         .getCameras();
 
 
-    if(
-      !cameras.length
-    ){
-
+    if(!cameras.length){
 
       alert(
         "카메라를 찾을 수 없습니다."
@@ -1974,25 +1670,19 @@ async function startScanner(){
     }
 
 
-    const cameraId =
-
-      cameras[
-        cameras.length - 1
-      ].id;
-
-
     scanning =
       true;
 
 
     button.innerHTML =
-
       "❌ 카메라 끄기";
 
 
     await scanner.start(
 
-      cameraId,
+      cameras[
+        cameras.length - 1
+      ].id,
 
 
       {
@@ -2010,20 +1700,13 @@ async function startScanner(){
       },
 
 
-      async function(
-        decodedText
-      ){
-
-
-        const id =
-          decodedText.trim();
-
+      async function(decodedText){
 
         await stopScanner();
 
 
         findMemberByQR(
-          id
+          decodedText.trim()
         );
 
       },
@@ -2036,7 +1719,6 @@ async function startScanner(){
   }
 
   catch(error){
-
 
     console.error(
       error
@@ -2052,7 +1734,6 @@ async function startScanner(){
 
 
     button.innerHTML =
-
       "📷 대원 QR 스캔";
 
 
@@ -2068,9 +1749,7 @@ async function startScanner(){
 
 async function stopScanner(){
 
-
   const button =
-
     document
       .getElementById(
         "scanButton"
@@ -2079,16 +1758,11 @@ async function stopScanner(){
 
   try{
 
-
     if(scanner){
-
 
       try{
 
-
-        if(
-          scanner.isScanning
-        ){
+        if(scanner.isScanning){
 
           await scanner.stop();
 
@@ -2096,13 +1770,7 @@ async function stopScanner(){
 
       }
 
-      catch(error){
-
-        console.log(
-          error
-        );
-
-      }
+      catch(error){}
 
 
       try{
@@ -2111,20 +1779,13 @@ async function stopScanner(){
 
       }
 
-      catch(error){
-
-        console.log(
-          error
-        );
-
-      }
+      catch(error){}
 
     }
 
   }
 
   finally{
-
 
     scanner =
       null;
@@ -2143,7 +1804,6 @@ async function stopScanner(){
 
 
     button.innerHTML =
-
       "📷 대원 QR 스캔";
 
   }
@@ -2152,22 +1812,18 @@ async function stopScanner(){
 
 
 
-// =====================================================
-// QR 대원 확인
-// =====================================================
+// QR 대원 찾기
 
 function findMemberByQR(id){
 
-
   const member =
-
     members.find(
-      function(member){
+      function(item){
 
         return(
 
           String(
-            member.id
+            item.id
           ).trim()
 
           ===
@@ -2183,7 +1839,6 @@ function findMemberByQR(id){
 
 
   if(!member){
-
 
     currentMember =
       null;
@@ -2230,16 +1885,9 @@ function findMemberByQR(id){
 
 
 
-// =====================================================
 // PPE 전체확인
-// =====================================================
 
 function togglePPEAll(master){
-
-
-  const checked =
-    master.checked;
-
 
   document
     .querySelectorAll(
@@ -2249,7 +1897,7 @@ function togglePPEAll(master){
       function(item){
 
         item.checked =
-          checked;
+          master.checked;
 
       }
     );
@@ -2261,41 +1909,32 @@ function togglePPEAll(master){
 
 
 
-// =====================================================
 // PPE 상태
-// =====================================================
 
 function checkPPE(){
 
-
-  const ppe1 =
-    document
-      .getElementById(
-        "ppe1"
-      )
-      .checked;
-
-
-  const ppe2 =
-    document
-      .getElementById(
-        "ppe2"
-      )
-      .checked;
-
-
-  const ppe3 =
-    document
-      .getElementById(
-        "ppe3"
-      )
-      .checked;
-
-
   const complete =
-    ppe1 &&
-    ppe2 &&
-    ppe3;
+    [
+      "ppe1",
+      "ppe2",
+      "ppe3"
+    ]
+    .every(
+      function(id){
+
+        return document
+          .getElementById(id)
+          .checked;
+
+      }
+    );
+
+
+  const status =
+    document
+      .getElementById(
+        "ppeStatus"
+      );
 
 
   document
@@ -2306,48 +1945,32 @@ function checkPPE(){
     complete;
 
 
-  const status =
-
-    document
-      .getElementById(
-        "ppeStatus"
-      );
-
-
   if(complete){
 
-
     status.innerHTML =
-
       "✅ PPE 점검완료 · 투입 가능";
 
 
     status.style.background =
-
       "#e6f4ea";
 
 
     status.style.color =
-
       "#188038";
 
   }
 
   else{
 
-
     status.innerHTML =
-
       "⚠️ PPE 점검 미완료 · 투입 보류";
 
 
     status.style.background =
-
       "#fce8e6";
 
 
     status.style.color =
-
       "#d93025";
 
   }
@@ -2356,15 +1979,11 @@ function checkPPE(){
 
 
 
-// =====================================================
 // 진입
-// =====================================================
 
 async function entryMember(){
 
-
   const site =
-
     document
       .getElementById(
         "site"
@@ -2373,7 +1992,6 @@ async function entryMember(){
 
 
   const officer =
-
     document
       .getElementById(
         "officer"
@@ -2416,25 +2034,20 @@ async function entryMember(){
 
 
   const ppeOK =
+    [
+      "ppe1",
+      "ppe2",
+      "ppe3"
+    ]
+    .every(
+      function(id){
 
-    document
-      .getElementById(
-        "ppe1"
-      ).checked
+        return document
+          .getElementById(id)
+          .checked;
 
-    &&
-
-    document
-      .getElementById(
-        "ppe2"
-      ).checked
-
-    &&
-
-    document
-      .getElementById(
-        "ppe3"
-      ).checked;
+      }
+    );
 
 
   if(!ppeOK){
@@ -2457,24 +2070,20 @@ async function entryMember(){
     "entry"
   );
 
-
   form.append(
     "site",
     site
   );
-
 
   form.append(
     "memberId",
     currentMember.id
   );
 
-
   form.append(
     "memberName",
     currentMember.name
   );
-
 
   form.append(
     "officer",
@@ -2484,9 +2093,7 @@ async function entryMember(){
 
   try{
 
-
     const response =
-
       await fetch(
 
         API,
@@ -2511,10 +2118,7 @@ async function entryMember(){
     );
 
 
-    if(
-      data.success
-    ){
-
+    if(data.success){
 
       resetNextMember();
 
@@ -2526,7 +2130,6 @@ async function entryMember(){
   }
 
   catch(error){
-
 
     console.error(
       error
@@ -2543,16 +2146,13 @@ async function entryMember(){
 
 
 
-// =====================================================
 // 대원 1명 철수
-// =====================================================
 
 async function exitOneMember(
   site,
   id,
   name
 ){
-
 
   const form =
     new URLSearchParams();
@@ -2563,44 +2163,35 @@ async function exitOneMember(
     "exit"
   );
 
-
   form.append(
     "site",
     site
   );
-
 
   form.append(
     "memberId",
     id
   );
 
-
   form.append(
     "memberName",
     name
   );
 
-
   form.append(
-
     "officer",
-
     document
       .getElementById(
         "officer"
       )
       .value
       .trim()
-
   );
 
 
   try{
 
-
     const response =
-
       await fetch(
 
         API,
@@ -2621,7 +2212,6 @@ async function exitOneMember(
   }
 
   catch(error){
-
 
     console.error(
       error
@@ -2644,15 +2234,11 @@ async function exitOneMember(
 
 
 
-// =====================================================
 // 단독 철수
-// =====================================================
 
 async function exitMember(){
 
-
   const site =
-
     document
       .getElementById(
         "site"
@@ -2683,7 +2269,6 @@ async function exitMember(){
 
 
   const result =
-
     await exitOneMember(
 
       site,
@@ -2700,10 +2285,7 @@ async function exitMember(){
   );
 
 
-  if(
-    result.success
-  ){
-
+  if(result.success){
 
     resetNextMember();
 
@@ -2716,15 +2298,22 @@ async function exitMember(){
 
 
 
-// =====================================================
 // 현재 내부대원
-// =====================================================
 
 async function loadInsideMembers(){
 
+  if(insideLoading){
+
+    return;
+
+  }
+
+
+  insideLoading =
+    true;
+
 
   const site =
-
     document
       .getElementById(
         "site"
@@ -2733,7 +2322,6 @@ async function loadInsideMembers(){
 
 
   const list =
-
     document
       .getElementById(
         "insideList"
@@ -2746,17 +2334,19 @@ async function loadInsideMembers(){
 
   if(!site){
 
-
     document
       .getElementById(
         "insideCount"
       )
       .innerHTML =
-
       "🔴 현재 현장 내부 0명";
 
 
     updateSelectedCount();
+
+
+    insideLoading =
+      false;
 
 
     return;
@@ -2766,9 +2356,7 @@ async function loadInsideMembers(){
 
   try{
 
-
     const response =
-
       await fetch(
 
         API +
@@ -2786,9 +2374,7 @@ async function loadInsideMembers(){
       await response.json();
 
 
-    if(
-      !data.success
-    ){
+    if(!data.success){
 
       return;
 
@@ -2811,7 +2397,6 @@ async function loadInsideMembers(){
     data.members.forEach(
       function(member){
 
-
         const row =
           document.createElement(
             "div"
@@ -2825,21 +2410,8 @@ async function loadInsideMembers(){
 
 
         row.className =
-
           "memberRow " +
-
           stay.className;
-
-
-        const displayName =
-
-          getMemberDisplay(
-
-            member.memberId,
-
-            member.memberName
-
-          );
 
 
         row.innerHTML =
@@ -2870,7 +2442,10 @@ async function loadInsideMembers(){
 
           "<div class='memberLine'>" +
 
-          displayName +
+          getMemberDisplay(
+            member.memberId,
+            member.memberName
+          ) +
 
           "</div>" +
 
@@ -2892,9 +2467,7 @@ async function loadInsideMembers(){
 
           member.currentMinutes +
 
-          "분" +
-
-          " / " +
+          "분 / " +
 
           member.entryCount +
 
@@ -2945,37 +2518,37 @@ async function loadInsideMembers(){
 
   }
 
+  finally{
+
+    insideLoading =
+      false;
+
+  }
+
 }
 
 
 
-// =====================================================
 // 전체선택
-// =====================================================
 
 function toggleSelectAll(){
-
-
-  const boxes =
-
-    document
-      .querySelectorAll(
-        ".insideCheck"
-      );
-
 
   selectAllState =
     !selectAllState;
 
 
-  boxes.forEach(
-    function(box){
+  document
+    .querySelectorAll(
+      ".insideCheck"
+    )
+    .forEach(
+      function(item){
 
-      box.checked =
-        selectAllState;
+        item.checked =
+          selectAllState;
 
-    }
-  );
+      }
+    );
 
 
   updateSelectedCount();
@@ -2984,15 +2557,11 @@ function toggleSelectAll(){
 
 
 
-// =====================================================
-// 선택인원
-// =====================================================
+// 선택 인원
 
 function updateSelectedCount(){
 
-
   const count =
-
     document
       .querySelectorAll(
         ".insideCheck:checked"
@@ -3016,15 +2585,11 @@ function updateSelectedCount(){
 
 
 
-// =====================================================
-// 일괄철수
-// =====================================================
+// 일괄 철수
 
 async function batchExitMembers(){
 
-
   const site =
-
     document
       .getElementById(
         "site"
@@ -3033,13 +2598,23 @@ async function batchExitMembers(){
 
 
   const officer =
-
     document
       .getElementById(
         "officer"
       )
       .value
       .trim();
+
+
+  const checked =
+    Array.from(
+
+      document
+        .querySelectorAll(
+          ".insideCheck:checked"
+        )
+
+    );
 
 
   if(!site){
@@ -3064,17 +2639,7 @@ async function batchExitMembers(){
   }
 
 
-  const checked =
-
-    document
-      .querySelectorAll(
-        ".insideCheck:checked"
-      );
-
-
-  if(
-    checked.length === 0
-  ){
+  if(!checked.length){
 
     alert(
       "철수 대원을 선택하세요."
@@ -3086,15 +2651,10 @@ async function batchExitMembers(){
 
 
   if(
-
     !confirm(
-
       checked.length +
-
       "명을 철수 처리하시겠습니까?"
-
     )
-
   ){
 
     return;
@@ -3106,13 +2666,9 @@ async function batchExitMembers(){
     0;
 
 
-  for(
-    const box of checked
-  ){
-
+  for(const box of checked){
 
     const result =
-
       await exitOneMember(
 
         site,
@@ -3124,9 +2680,7 @@ async function batchExitMembers(){
       );
 
 
-    if(
-      result.success
-    ){
+    if(result.success){
 
       successCount++;
 
@@ -3136,13 +2690,9 @@ async function batchExitMembers(){
 
 
   alert(
-
     "✅ " +
-
     successCount +
-
     "명 철수 처리 완료"
-
   );
 
 
@@ -3152,12 +2702,9 @@ async function batchExitMembers(){
 
 
 
-// =====================================================
-// 초기화
-// =====================================================
+// 다음 대원 초기화
 
 function resetNextMember(){
-
 
   currentMember =
     null;
@@ -3176,44 +2723,25 @@ function resetNextMember(){
       "member"
     )
     .innerHTML =
-
-    '<option value="">' +
-
-    '검색 결과에서 대원을 선택하세요' +
-
-    '</option>';
+    '<option value="">검색 결과에서 대원을 선택하세요</option>';
 
 
-  document
-    .getElementById(
-      "ppe1"
-    )
-    .checked =
-    false;
+  [
+    "ppe1",
+    "ppe2",
+    "ppe3",
+    "ppeAll"
+  ]
+  .forEach(
+    function(id){
 
+      document
+        .getElementById(id)
+        .checked =
+        false;
 
-  document
-    .getElementById(
-      "ppe2"
-    )
-    .checked =
-    false;
-
-
-  document
-    .getElementById(
-      "ppe3"
-    )
-    .checked =
-    false;
-
-
-  document
-    .getElementById(
-      "ppeAll"
-    )
-    .checked =
-    false;
+    }
+  );
 
 
   document
@@ -3228,7 +2756,6 @@ function resetNextMember(){
 
 
   const status =
-
     document
       .getElementById(
         "ppeStatus"
@@ -3250,15 +2777,11 @@ function resetNextMember(){
 
 
 
-// =====================================================
-// 현황 열기
-// =====================================================
+// 현장현황 열기
 
 async function openDashboard(){
 
-
   const site =
-
     document
       .getElementById(
         "site"
@@ -3312,12 +2835,9 @@ async function openDashboard(){
 
 
 
-// =====================================================
-// 돌아가기
-// =====================================================
+// 안전관리 화면으로 돌아가기
 
 function closeDashboard(){
-
 
   document
     .getElementById(
@@ -3335,9 +2855,6 @@ function closeDashboard(){
     "block";
 
 
-  loadInsideMembers();
-
-
   window.scrollTo(
     0,
     0
@@ -3347,15 +2864,22 @@ function closeDashboard(){
 
 
 
-// =====================================================
-// 지휘관 현황
-// =====================================================
+// 현장현황
 
 async function loadDashboard(){
 
+  if(dashboardLoading){
+
+    return;
+
+  }
+
+
+  dashboardLoading =
+    true;
+
 
   const site =
-
     document
       .getElementById(
         "site"
@@ -3364,6 +2888,10 @@ async function loadDashboard(){
 
 
   if(!site){
+
+    dashboardLoading =
+      false;
+
 
     return;
 
@@ -3380,9 +2908,7 @@ async function loadDashboard(){
 
   try{
 
-
     const response =
-
       await fetch(
 
         API +
@@ -3400,10 +2926,7 @@ async function loadDashboard(){
       await response.json();
 
 
-    if(
-      !data.success
-    ){
-
+    if(!data.success){
 
       alert(
         "현장 현황을 불러오지 못했습니다."
@@ -3443,40 +2966,96 @@ async function loadDashboard(){
       dash.exitedCount;
 
 
-    document
-      .getElementById(
-        "dashEntries"
-      )
-      .innerText =
-      dash.totalEntryCount;
+
+    /* 현재 내부대원만 체류시간 계산 */
+
+    let greenCount =
+      0;
 
 
-    /* 31분 이상 대원 수 계산 */
+    let orangeCount =
+      0;
+
+
+    let redCount =
+      0;
+
 
     let criticalCount =
       0;
 
 
-    if(
-      dash.insideMembers
-    ){
+    (
+      dash.insideMembers || []
+    )
+    .forEach(
+      function(member){
+
+        const minutes =
+          Number(
+            member.currentMinutes
+          ) || 0;
 
 
-      criticalCount =
+        if(minutes <= 20){
 
-        dash.insideMembers.filter(
-          function(member){
+          greenCount++;
 
-            return(
-              Number(
-                member.currentMinutes
-              ) > 30
-            );
+        }
 
-          }
-        ).length;
+        else if(minutes <= 25){
 
-    }
+          orangeCount++;
+
+        }
+
+        else if(minutes <= 30){
+
+          redCount++;
+
+        }
+
+        else{
+
+          criticalCount++;
+
+        }
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "stayGreenCount"
+      )
+      .innerText =
+
+      greenCount +
+
+      "명";
+
+
+    document
+      .getElementById(
+        "stayOrangeCount"
+      )
+      .innerText =
+
+      orangeCount +
+
+      "명";
+
+
+    document
+      .getElementById(
+        "stayRedCount"
+      )
+      .innerText =
+
+      redCount +
+
+      "명";
 
 
     updateCriticalSummary(
@@ -3485,18 +3064,17 @@ async function loadDashboard(){
 
 
     drawDashboardInside(
-      dash.insideMembers
+      dash.insideMembers || []
     );
 
 
     drawDashboardExited(
-      dash.exitedMembers
+      dash.exitedMembers || []
     );
 
   }
 
   catch(error){
-
 
     console.error(
       error
@@ -3509,29 +3087,29 @@ async function loadDashboard(){
 
   }
 
+  finally{
+
+    dashboardLoading =
+      false;
+
+  }
+
 }
 
 
 
-// =====================================================
-// 즉시확인 대상 인원
-// =====================================================
+// 31분 이상 즉시 확인
 
 function updateCriticalSummary(count){
 
-
   const box =
-
     document
       .getElementById(
         "criticalSummary"
       );
 
 
-  if(
-    count > 0
-  ){
-
+  if(count > 0){
 
     box.classList.add(
       "hasCritical"
@@ -3540,7 +3118,7 @@ function updateCriticalSummary(count){
 
     box.innerHTML =
 
-      "⚠️ 즉시 확인 대상 " +
+      "⚠️ 31분 이상 즉시 확인 대상 " +
 
       count +
 
@@ -3550,15 +3128,13 @@ function updateCriticalSummary(count){
 
   else{
 
-
     box.classList.remove(
       "hasCritical"
     );
 
 
     box.innerHTML =
-
-      "✅ 즉시 확인 대상 0명";
+      "✅ 31분 이상 즉시 확인 대상 0명";
 
   }
 
@@ -3566,17 +3142,11 @@ function updateCriticalSummary(count){
 
 
 
-// =====================================================
-// 현황 - 내부대원
-// =====================================================
+// 현황 내부대원
 
-function drawDashboardInside(
-  insideMembers
-){
-
+function drawDashboardInside(list){
 
   const area =
-
     document
       .getElementById(
         "dashboardInside"
@@ -3587,23 +3157,11 @@ function drawDashboardInside(
     "";
 
 
-  if(
-
-    !insideMembers
-
-    ||
-
-    insideMembers.length === 0
-
-  ){
-
+  if(!list.length){
 
     area.innerHTML =
-
       "<div class='empty'>" +
-
       "현재 내부 대원이 없습니다." +
-
       "</div>";
 
 
@@ -3612,15 +3170,8 @@ function drawDashboardInside(
   }
 
 
-  insideMembers.forEach(
+  list.forEach(
     function(member){
-
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
 
       const stay =
         getStayStatus(
@@ -3628,11 +3179,10 @@ function drawDashboardInside(
         );
 
 
-      div.className =
-
-        "commandMember " +
-
-        stay.className;
+      const div =
+        document.createElement(
+          "div"
+        );
 
 
       const historyId =
@@ -3644,15 +3194,11 @@ function drawDashboardInside(
         "_inside";
 
 
-      const displayName =
+      div.className =
 
-        getMemberDisplay(
+        "commandMember " +
 
-          member.memberId,
-
-          member.memberName
-
-        );
+        stay.className;
 
 
       div.innerHTML =
@@ -3663,12 +3209,15 @@ function drawDashboardInside(
 
         " " +
 
-        displayName +
+        getMemberDisplay(
+          member.memberId,
+          member.memberName
+        ) +
 
         "</div>" +
 
 
-        "<div class='commandId'>" +
+        "<div class='memberId'>" +
 
         member.memberId +
 
@@ -3677,9 +3226,7 @@ function drawDashboardInside(
 
         "<div class='commandInfo'>" +
 
-
         "현재 상태 : <b>현장 내부</b><br>" +
-
 
         "현재 체류 : <b>" +
 
@@ -3687,13 +3234,11 @@ function drawDashboardInside(
 
         "분</b><br>" +
 
-
         "진입 횟수 : " +
 
         member.entryCount +
 
         "회<br>" +
-
 
         "이전 활동 : " +
 
@@ -3701,13 +3246,11 @@ function drawDashboardInside(
 
         "분<br>" +
 
-
         "누적 활동 : <b>" +
 
         member.totalMinutes +
 
         "분</b>" +
-
 
         "</div>" +
 
@@ -3737,9 +3280,7 @@ function drawDashboardInside(
 
         "')\">" +
 
-
         "📋 진입·철수 이력 보기" +
-
 
         "</button>" +
 
@@ -3754,11 +3295,9 @@ function drawDashboardInside(
 
         "class='history'>" +
 
-
         makeHistoryHTML(
           member.records
         ) +
-
 
         "</div>";
 
@@ -3774,17 +3313,11 @@ function drawDashboardInside(
 
 
 
-// =====================================================
-// 현황 - 철수대원
-// =====================================================
+// 철수대원
 
-function drawDashboardExited(
-  exitedMembers
-){
-
+function drawDashboardExited(list){
 
   const area =
-
     document
       .getElementById(
         "dashboardExited"
@@ -3795,23 +3328,11 @@ function drawDashboardExited(
     "";
 
 
-  if(
-
-    !exitedMembers
-
-    ||
-
-    exitedMembers.length === 0
-
-  ){
-
+  if(!list.length){
 
     area.innerHTML =
-
       "<div class='empty'>" +
-
       "철수 완료 대원이 없습니다." +
-
       "</div>";
 
 
@@ -3820,18 +3341,13 @@ function drawDashboardExited(
   }
 
 
-  exitedMembers.forEach(
+  list.forEach(
     function(member){
-
 
       const div =
         document.createElement(
           "div"
         );
-
-
-      div.className =
-        "commandMember exited";
 
 
       const historyId =
@@ -3843,15 +3359,8 @@ function drawDashboardExited(
         "_exit";
 
 
-      const displayName =
-
-        getMemberDisplay(
-
-          member.memberId,
-
-          member.memberName
-
-        );
+      div.className =
+        "commandMember exited";
 
 
       div.innerHTML =
@@ -3860,12 +3369,15 @@ function drawDashboardExited(
 
         "🟢 " +
 
-        displayName +
+        getMemberDisplay(
+          member.memberId,
+          member.memberName
+        ) +
 
         "</div>" +
 
 
-        "<div class='commandId'>" +
+        "<div class='memberId'>" +
 
         member.memberId +
 
@@ -3874,9 +3386,7 @@ function drawDashboardExited(
 
         "<div class='commandInfo'>" +
 
-
         "현재 상태 : <b>철수</b><br>" +
-
 
         "총 진입 : " +
 
@@ -3884,13 +3394,11 @@ function drawDashboardExited(
 
         "회<br>" +
 
-
         "누적 활동 : <b>" +
 
         member.totalMinutes +
 
         "분</b>" +
-
 
         "</div>" +
 
@@ -3905,9 +3413,7 @@ function drawDashboardExited(
 
         "')\">" +
 
-
         "📋 전체 활동이력 보기" +
-
 
         "</button>" +
 
@@ -3922,11 +3428,9 @@ function drawDashboardExited(
 
         "class='history'>" +
 
-
         makeHistoryHTML(
           member.records
         ) +
-
 
         "</div>";
 
@@ -3942,25 +3446,14 @@ function drawDashboardExited(
 
 
 
-// =====================================================
-// 이력
-// =====================================================
+// 진입·철수 이력
 
-function makeHistoryHTML(
-  records
-){
-
+function makeHistoryHTML(records){
 
   if(
-
-    !records
-
-    ||
-
-    records.length === 0
-
+    !records ||
+    !records.length
   ){
-
 
     return(
       "활동이력이 없습니다."
@@ -3969,111 +3462,87 @@ function makeHistoryHTML(
   }
 
 
-  let html =
-    "";
+  return records
+    .map(
+      function(record){
 
+        return(
 
-  records.forEach(
-    function(record){
+          "<div class='historyRow'>" +
 
+          "<b>" +
 
-      const state =
+          record.sequence +
 
-        record.status ===
-        "진입중"
+          "차 진입</b><br>" +
 
-        ?
+          record.entryTime +
 
-        "🔴 현재 내부"
+          " → " +
 
-        :
+          record.exitTime +
 
-        "🟢 철수완료";
+          "<br>" +
 
+          "활동 " +
 
-      html +=
+          record.minutes +
 
-        "<div class='historyRow'>" +
+          "분 / " +
 
+          (
 
-        "<b>" +
+            record.status ===
+            "진입중"
 
-        record.sequence +
+            ?
 
-        "차 진입</b><br>" +
+            "🔴 현재 내부"
 
+            :
 
-        record.entryTime +
+            "🟢 철수완료"
 
-        " → " +
+          ) +
 
-        record.exitTime +
+          "</div>"
 
+        );
 
-        "<br>" +
-
-
-        "활동 " +
-
-        record.minutes +
-
-        "분 / " +
-
-        state +
-
-
-        "</div>";
-
-    }
-  );
-
-
-  return html;
+      }
+    )
+    .join("");
 
 }
 
 
 
-// =====================================================
 // 이력 열기 / 닫기
-// =====================================================
 
 function toggleHistory(id){
 
-
   const box =
-
     document
-      .getElementById(
-        id
-      );
+      .getElementById(id);
 
 
-  if(
+  box.style.display =
+
     box.style.display ===
     "block"
-  ){
 
+    ?
 
-    box.style.display =
-      "none";
+    "none"
 
-  }
+    :
 
-  else{
-
-
-    box.style.display =
-      "block";
-
-  }
+    "block";
 
 }
 
 
 </script>
 
-
 </body>
-
 </html>
